@@ -2904,27 +2904,32 @@
     </h2>
 
     <div class="cta-grid">
-      <form class="cta-form reveal reveal-d1" onsubmit="event.preventDefault(); alert('Connect this form to Formspree / Tally / your backend.');">
+      <form class="cta-form reveal reveal-d1" id="contactForm" action="https://formspree.io/f/myklavpy" method="POST">
         <div>
-          <label>Name</label>
-          <input type="text" required placeholder="Your name" />
+          <label for="cf-name">Name</label>
+          <input id="cf-name" type="text" name="name" required placeholder="Your name" autocomplete="name" />
         </div>
         <div>
-          <label>Email</label>
-          <input type="email" required placeholder="your@email.com" />
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" name="email" required placeholder="your@email.com" autocomplete="email" />
         </div>
         <div>
-          <label>Company / Brand &nbsp;—&nbsp; optional</label>
-          <input type="text" placeholder="The label or studio you represent" />
+          <label for="cf-company">Company / Brand &nbsp;—&nbsp; optional</label>
+          <input id="cf-company" type="text" name="company" placeholder="The label or studio you represent" autocomplete="organization" />
         </div>
         <div>
-          <label>Brief</label>
-          <textarea required rows="3" placeholder="Type, scope, deadline. Keep it short — we reply within 24h."></textarea>
+          <label for="cf-brief">Brief</label>
+          <textarea id="cf-brief" name="message" required rows="3" placeholder="Type, scope, deadline. Keep it short — we reply within 24h."></textarea>
         </div>
-        <button type="submit" class="cta-submit">
-          Send the brief
+        <!-- Honeypot — invisible to humans, only bots fill it. We discard the submission if it's filled. -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; height:0; width:0; opacity:0;" />
+        <!-- Subject for the email Javier will receive -->
+        <input type="hidden" name="_subject" value="New brief from artimind.art" />
+        <button type="submit" class="cta-submit" id="cf-submit">
+          <span class="cf-btn-text">Send the brief</span>
           <span class="circ">→</span>
         </button>
+        <div id="cf-status" style="display: none; padding: 16px 0; font-family: var(--serif); font-style: italic; font-size: 18px; line-height: 1.4;"></div>
       </form>
 
       <div class="cta-info reveal reveal-d2">
@@ -4199,6 +4204,76 @@ async function renderPost(slug) {
   }
 
   return true;
+}
+
+// =====================================================
+// CONTACT FORM — Formspree integration with AJAX
+// =====================================================
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('cf-submit');
+    const btnText = submitBtn.querySelector('.cf-btn-text');
+    const statusEl = document.getElementById('cf-status');
+    const formData = new FormData(contactForm);
+
+    // Reset previous state
+    statusEl.style.display = 'none';
+    statusEl.style.color = 'var(--paper)';
+
+    // Loading state
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.6';
+    submitBtn.style.cursor = 'not-allowed';
+    btnText.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {'Accept': 'application/json'},
+      });
+
+      if (response.ok) {
+        // Success
+        contactForm.reset();
+        statusEl.style.display = 'block';
+        statusEl.style.color = 'var(--neon)';
+        statusEl.innerHTML = '<em>Brief received.</em> We\'ll reply within 24h on weekdays. ✓';
+        btnText.textContent = 'Sent ✓';
+        // Reset button after 3s
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.cursor = 'pointer';
+          btnText.textContent = 'Send the brief';
+        }, 3000);
+      } else {
+        // Server returned an error
+        const data = await response.json().catch(() => ({}));
+        const message = (data.errors && data.errors[0] && data.errors[0].message) ||
+                        'Something went wrong. Please try again or email us directly.';
+        statusEl.style.display = 'block';
+        statusEl.style.color = '#FF6B6B';
+        statusEl.textContent = message;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor = 'pointer';
+        btnText.textContent = 'Send the brief';
+      }
+    } catch (err) {
+      // Network error
+      statusEl.style.display = 'block';
+      statusEl.style.color = '#FF6B6B';
+      statusEl.textContent = 'Network error. Please try again or email hello@artimind.studio directly.';
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor = 'pointer';
+      btnText.textContent = 'Send the brief';
+    }
+  });
 }
 
 // =====================================================
