@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "the-json-system",
+    "title_b": "The JSON system",
+    "title_it": "that 10x'd our editorial work",
+    "category": "process",
+    "categoryLabel": "Process",
+    "date": "2026-04-22",
+    "dateFormatted": "22 April 2026",
+    "readtime": "6 min read",
+    "excerpt": "A structured prompt is the difference between a one-off lucky generation and a reproducible visual language. Here's the schema we've been refining for two years.",
+    "coverFill": "fill-1",
+    "tags": [
+      "prompts",
+      "json",
+      "workflow",
+      "midjourney"
+    ],
+    "related": [
+      "last-train-breakdown",
+      "kling-3-deep-dive"
+    ],
+    "body": "<p>Most AI editorial work fails for a single reason: <em>the prompt is unstructured</em>. A loose paragraph, a few keywords, a couple of style references thrown in. The result is one lucky generation that nobody can reproduce — not even the person who wrote it.</p>\n<p>At Artimind we treat every concept as a <strong>structured object</strong> before it touches a generation tool. The result: same model, same atmosphere, same color grade, frame after frame, season after season.</p>\n<h2>The schema in seven fields</h2>\n<p>Every prompt fits in this JSON shape:</p>\n<pre><code><span class=\"k\">\"subject\"</span>: { primary, wardrobe, expression, pose, ethnicity_features, hair_makeup },\n<span class=\"k\">\"environment\"</span>: { location, time_of_day, weather_atmosphere, depth_layers },\n<span class=\"k\">\"photography\"</span>: { camera, lens, shutter_aperture, lighting, composition },\n<span class=\"k\">\"cinema\"</span>: { color_grade, film_stock_emulation, aspect_ratio, grain_texture },\n<span class=\"k\">\"vibe\"</span>: { mood_keywords, references, narrative_implication },\n<span class=\"k\">\"constraints\"</span>: { must_include, consistency_anchors },\n<span class=\"k\">\"negative\"</span>: [\"plastic skin\", \"smiling\", \"centered composition\", ...]</code></pre>\n<h3>Why seven and not five</h3>\n<p>The first version of this had five fields. We kept losing the cinematic grade between drops, so we split <em>cinema</em> from <em>photography</em>. Then we kept losing model consistency across a series, so we added <em>constraints</em> with explicit consistency anchors.</p>\n<p>Five fields is enough for a single image. <strong>Seven is what you need for a body of work.</strong></p>\n<h2>The discipline of negation</h2>\n<blockquote>If you're not using a 6+ item negative prompt, you're leaving 30% of the result on the table.</blockquote>\n<p>The negative prompt is where most editorial AI fails. Default models love symmetric faces, soft uniform light, plastic skin and centered composition. <em>All of which is the opposite of editorial.</em></p>\n<p>Our standard negative list:</p>\n<ul><li>plastic skin</li><li>smiling</li><li>centered composition</li><li>soft uniform beauty lighting</li><li>saturated colors</li><li>warped hands</li><li>frontal flash</li><li>obvious AI tells</li></ul>\n<h2>From JSON to image</h2>\n<p>Once the JSON is locked, we ask Claude (or GPT) to compress it into a single Midjourney prompt under 100 words, prioritizing the <em>photography</em> and <em>cinema</em> fields. Why 100 words: longer prompts dilute attention. Why those two fields: they carry the visual signature.</p>\n<p>From there: generate 6-8 variations, pick 1-2 keepers, upscale with Magnific, color grade in Photoshop. <strong>~ 12-18 minutes per final image.</strong></p>\n<hr/>\n<em>This is the system behind every editorial drop on the studio. The next post breaks down a single piece — Last Train, Tokyo 2089 — frame by frame using this exact JSON.</em>"
+  },
+  {
+    "slug": "last-train-breakdown",
+    "title_b": "Last Train, Tokyo 2089",
+    "title_it": "a frame-by-frame breakdown",
+    "category": "behind-the-drop",
+    "categoryLabel": "Behind the drop",
+    "date": "2026-04-18",
+    "dateFormatted": "18 April 2026",
+    "readtime": "8 min read",
+    "excerpt": "Wong Kar-wai's mood, not sci-fi. A two-light, two-color noir, 90 minutes from prompt to publish. The full breakdown of our most-saved drop of the season.",
+    "coverFill": "fill-1",
+    "tags": [
+      "breakdown",
+      "kling",
+      "cinematic",
+      "noir"
+    ],
+    "related": [
+      "the-json-system",
+      "kling-3-deep-dive"
+    ],
+    "body": "<p>This piece sat at the top of our pinned tweet for three weeks and is still our most-saved drop of SS26. <em>The premise was simple to a fault</em>: a woman on the last bullet train out of Tokyo. 2 AM, 2089. Neon city blurring past the window. The brief I gave myself: <strong>Wong Kar-wai's mood, not sci-fi.</strong> Restraint over spectacle.</p>\n<h2>The reference stack</h2>\n<p>Before any prompt: three images on a moodboard, taped to the wall metaphorically.</p>\n<ol><li><em>Chungking Express</em> — Wong Kar-wai's restraint, a stranger glimpsed in a moving frame.</li><li><em>Blade Runner 2049</em> — Roger Deakins's cyan/orange noir, the sense of a city as a character.</li><li><em>Helmut Lang FW96</em> campaign — the silhouette of an oversized coat, off-camera gaze.</li></ol>\nThe point of the moodboard isn't to copy. It's to define what we're <em>not</em> doing. We're not doing dramatic action. Not doing science fiction. Not doing fashion-forward styling. <strong>The whole point is the in-between moment.</strong>\n<h2>The two-light, two-color rule</h2>\n<p>Every cinematic noir shot we make follows this. <em>One key light. One rim/fill. Two color temperatures.</em> Anything else is a distraction.</p>\n<p>For this piece:</p>\n<ul><li>Key — neon outside the window. Cyan, cold, slightly diffused by rain on glass.</li><li>Rim — interior tungsten of the train car. Warm orange, hitting the back of her hair.</li></ul>\nThe face sits in the negative space between these two sources. Half her cheek catches cyan, half catches tungsten. <strong>That's where the mood lives.</strong>\n<blockquote>Most AI editorial fails because the lighting is too clean. Real cinema has direction, falloff, and competing color temperatures.</blockquote>\n<h2>The prompt that worked</h2>\n<pre><code>Asian female model, mid-20s, sharp cheekbones, oversized\ncharcoal coat damp from rain, distant gaze off-camera,\nleaning against rain-streaked train window. Interior of\na futuristic high-speed train at night, 2 AM, neon city\nblurred outside. Arri Alexa 65, 50mm anamorphic f/1.4,\nkey from window neon (cyan), warm rim from interior\ntungsten. Cinestill 800T pushed +1, fine grain. 2.39:1.\n<p>--ar 21:9 --sref [our recurring noir sref]<br/>--no smiling, centered, soft, plastic, warped hands</code></pre></p>\n<h2>From still to motion</h2>\n<p>The still went into Kling 3.0 with this motion prompt:</p>\n<blockquote><em>Subtle camera push in. Light rain on window. Gentle wind moves strands of her hair. Her gaze stays off-camera. Cinematic. 5 seconds.</em></blockquote>\n<p>Two notes about Kling: <strong>avoid action verbs.</strong> Words like \"subtle\" and \"gentle\" produce far better results than \"moves\" or \"turns\". And <strong>specify the gaze</strong> — otherwise Kling will rotate the face toward camera, which kills the noir entirely.</p>\n<h2>The kill ratio</h2>\n<p>Eight stills generated. Six killed. Two refined in Magnific + Photoshop. <em>One published.</em> The kill ratio is the work.</p>\n<hr/>\n<em>The full JSON for this piece is available to creators in our Vol. I sref pack. Or, you can build your own using <a href=\"#/blog/the-json-system\">the JSON system post</a>.</em>"
+  },
+  {
+    "slug": "kling-3-deep-dive",
+    "title_b": "Kling 3.0",
+    "title_it": "four months in, what changed",
+    "category": "tool",
+    "categoryLabel": "Tool deep-dive",
+    "date": "2026-04-10",
+    "dateFormatted": "10 April 2026",
+    "readtime": "5 min read",
+    "excerpt": "After 200+ generations on Kling 3.0, here's what actually shifted in the workflow, what still doesn't work, and the prompt patterns that consistently deliver editorial-grade motion.",
+    "coverFill": "fill-3",
+    "tags": [
+      "kling",
+      "video",
+      "tool",
+      "workflow"
+    ],
+    "related": [
+      "the-json-system",
+      "last-train-breakdown"
+    ],
+    "body": "<p>Kling 3.0 dropped in late January 2026. Four months and roughly 200 generations later, this is what's true about it from the inside of an editorial workflow. <em>Not a launch review.</em> A working creator's notes.</p>\n<h2>What changed that actually matters</h2>\n<p>Three things. The rest is incremental.</p>\n<ol><li><strong>Camera control is real.</strong> \"Subtle dolly in\" no longer means \"random zoom\". The model has internalized cinematographer vocabulary.</li><li><strong>Hair and fabric physics</strong> finally look like physics. Wind in a coat is wind in a coat, not chaotic noise.</li><li><strong>Frame coherence at 5+ seconds</strong> — characters stop morphing into different people. We can finally do 8-10 second cuts.</li></ol>\n<h2>What still doesn't work</h2>\n<p>Kling 3.0 is not a magic wand. Things that still break:</p>\n<ul><li>Hands holding objects with weight (cups, books)</li><li>Two characters interacting in the same frame</li><li>Reflective surfaces that should track the scene (mirrors, water)</li><li>Fast motion of any kind — the model still smudges</li></ul>\nOur rule: <em>if your shot needs any of these, generate the still and find a different motion solution.</em> Sometimes that's Veo 3, sometimes that's Runway, sometimes that's just accepting the still.\n<h2>The prompt patterns that ship</h2>\n<p>After 200 generations, three patterns consistently produce editorial-grade output:</p>\n<h3>Pattern 1 — The breath shot</h3>\n<blockquote>Subtle [push in / pull out / dolly left]. [Subject] holds gaze [direction]. [One environmental detail moves softly]. Cinematic. 5 seconds.</blockquote>\n<p>This is 70% of what we publish. It works because it's the most film-literate way to describe motion to the model.</p>\n<h3>Pattern 2 — The atmospheric loop</h3>\n<blockquote>Static frame. [Atmospheric element] moves [adjective]. [Subject] remains still. Loopable. Cinematic. 6 seconds.</blockquote>\n<p>For Hero Drops where the still is already strong and motion is just a layer of life. Best for fabric, smoke, water, hair.</p>\n<h3>Pattern 3 — The slow reveal</h3>\n<blockquote>Camera slowly [reveals / pulls back to reveal] [scene element]. [Subject] enters / exits frame at [end / start]. Cinematic. 8 seconds.</blockquote>\n<p>The most cinematic of the three. Hardest to nail. When it works, it's the difference between an AI clip and a film moment.</p>\n<h2>The honest take</h2>\n<p>Kling 3.0 is the first video model where <em>I stopped fighting the tool.</em> I now think in terms of what the piece needs, not what the tool will allow. That's the threshold. Before that, you're a prompt engineer; after that, you're a director.</p>\n<p>The next leap I'm watching for: <strong>character consistency across cuts.</strong> When that works, AI editorial film at length becomes possible. We're maybe 6-12 months out.</p>\n<hr/>\n<em>If you want the full prompt patterns + the camera vocabulary table we use internally, it's in our <a href=\"#/contact\">JSON Templates pack</a>.</em>"
+  }
+]
