@@ -3637,7 +3637,7 @@ function sanityImageUrl(imageRef, options = {}) {
 }
 
 async function sanityFetch(query) {
-  if (SANITY_CONFIG.projectId === 'pwu6835o') {
+  if (!SANITY_CONFIG.projectId || SANITY_CONFIG.projectId === 'REPLACE_ME') {
     console.warn('[Sanity] Project ID not configured. Using inline fallback data.');
     return null;
   }
