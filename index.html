@@ -231,16 +231,17 @@
   .menu-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
-    height: 100vh;
-    min-height: 600px;
+    grid-auto-rows: minmax(140px, auto);
+    min-height: 100%;
     gap: 0;
   }
   @media (min-width: 768px) {
     .menu-grid {
       grid-template-columns: 2fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
+      grid-auto-rows: auto;
       height: 100vh;
+      min-height: 600px;
     }
   }
 
@@ -253,14 +254,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 24px;
+    gap: 24px;
+    padding: 28px 24px;
     background: var(--paper);
+    min-height: 140px;
   }
   @media (min-width: 768px) {
     .menu-tile {
       border-bottom: 1px solid var(--ink);
       border-right: 1px solid var(--ink);
       padding: 32px;
+      min-height: 0;
     }
   }
 
@@ -299,11 +303,12 @@
     align-self: flex-start;
     font-family: var(--serif);
     font-style: italic;
-    font-size: clamp(48px, 8vw, 120px);
-    line-height: 0.85;
+    font-size: clamp(40px, 9vw, 120px);
+    line-height: 0.9;
     letter-spacing: -0.03em;
     color: var(--ink);
     transition: color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    word-break: break-word;
   }
   .menu-tile-meta {
     align-self: flex-end;
@@ -3506,7 +3511,7 @@
 // =====================================================
 // WORKS DATA
 // =====================================================
-const works = [
+const inlineWorks = [
   {
     slug: 'last-train-tokyo',
     num: '001',
@@ -3600,6 +3605,143 @@ const works = [
 ];
 
 // =====================================================
+// SANITY CMS — configuration & data loading
+// =====================================================
+// REPLACE 'pwu6835o' with your real Project ID from sanity.io
+// (visible at https://www.sanity.io/manage → your project → Settings → API)
+const SANITY_CONFIG = {
+  projectId: 'pwu6835o',
+  dataset: 'production',
+  apiVersion: '2024-01-01',
+  useCdn: true, // CDN cache for fast reads. Set to false for instant updates.
+};
+
+function sanityImageUrl(imageRef, options = {}) {
+  if (!imageRef || !imageRef.asset || !imageRef.asset._ref) return null;
+  // Parse asset ref like "image-abc123-1920x1080-jpg"
+  const ref = imageRef.asset._ref;
+  const parts = ref.split('-');
+  if (parts.length < 4) return null;
+  const id = parts[1];
+  const dimensions = parts[2];
+  const format = parts[3];
+  const baseUrl = `https://cdn.sanity.io/images/${SANITY_CONFIG.projectId}/${SANITY_CONFIG.dataset}/${id}-${dimensions}.${format}`;
+  const params = new URLSearchParams();
+  if (options.w) params.set('w', options.w);
+  if (options.h) params.set('h', options.h);
+  if (options.q) params.set('q', options.q || 80);
+  if (options.fit) params.set('fit', options.fit);
+  if (options.auto) params.set('auto', 'format');
+  const queryString = params.toString();
+  return queryString ? `${baseUrl}?${queryString}` : baseUrl;
+}
+
+async function sanityFetch(query) {
+  if (SANITY_CONFIG.projectId === 'pwu6835o') {
+    console.warn('[Sanity] Project ID not configured. Using inline fallback data.');
+    return null;
+  }
+  try {
+    const cdnPart = SANITY_CONFIG.useCdn ? 'apicdn' : 'api';
+    const url = `https://${SANITY_CONFIG.projectId}.${cdnPart}.sanity.io/v${SANITY_CONFIG.apiVersion}/data/query/${SANITY_CONFIG.dataset}?query=${encodeURIComponent(query)}`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`Sanity API ${r.status}`);
+    const data = await r.json();
+    return data.result;
+  } catch (e) {
+    console.warn('[Sanity] Fetch failed, using inline fallback:', e.message);
+    return null;
+  }
+}
+
+// Transform Sanity work document → format the landing expects
+function transformSanityWork(w) {
+  const cover = w.cover ? sanityImageUrl(w.cover, {w: 1600, q: 85, auto: 'format'}) : null;
+  const gallery = (w.gallery || []).map(img => sanityImageUrl(img, {w: 800, q: 80, auto: 'format'})).filter(Boolean);
+
+  // Build specs object preserving display capitalization
+  const specsRaw = w.specs || {};
+  const specs = {
+    Camera: specsRaw.camera || '',
+    Lens: specsRaw.lens || '',
+    Aperture: specsRaw.aperture || '',
+    Stock: specsRaw.stock || '',
+    Aspect: specsRaw.aspect || '',
+    Tools: specsRaw.tools || '',
+    Time: specsRaw.time || '',
+    References: specsRaw.references || '',
+  };
+
+  const metaRaw = w.metaSpecs || {};
+  const metaSpecs = {
+    Camera: metaRaw.camera || specs.Camera,
+    Stock: metaRaw.stock || specs.Stock,
+    Aspect: metaRaw.aspect || specs.Aspect,
+    Year: metaRaw.year || w.year || '',
+  };
+
+  return {
+    slug: w.slug?.current || w.slug,
+    num: String(w.order || 1).padStart(3, '0'),
+    category: w.category === 'hero-drop' ? 'Hero Drop' : 'Editorial',
+    bold: w.title_b || '',
+    italic: w.title_it || '',
+    fill: w.fillFallback || 'fill-1',
+    coverImage: cover,
+    galleryImages: gallery,
+    aspectRatio: w.aspectRatio || '4/5',
+    premise: w.premise || '',
+    approach: w.approach || '',
+    specs,
+    metaSpecs,
+    jsonPrompt: w.jsonPrompt || '',
+  };
+}
+
+// Cache & loader for works
+let cachedWorks = null;
+async function getWorks() {
+  if (cachedWorks !== null) return cachedWorks;
+  const query = `*[_type == "work"] | order(order asc) {
+    _id,
+    title_b,
+    title_it,
+    "slug": slug.current,
+    order,
+    category,
+    year,
+    cover,
+    aspectRatio,
+    gallery,
+    premise,
+    approach,
+    specs,
+    jsonPrompt,
+    metaSpecs
+  }`;
+  const result = await sanityFetch(query);
+  if (result && result.length > 0) {
+    cachedWorks = result.map(transformSanityWork);
+  } else {
+    cachedWorks = inlineWorks;
+  }
+  return cachedWorks;
+}
+
+// Compatibility: old code uses `works` as a synchronous global.
+// We expose it as a getter that returns inlineWorks immediately,
+// but trigger an async upgrade in the background.
+let works = inlineWorks;
+getWorks().then(w => {
+  works = w;
+  // If user is currently viewing a work page, re-render with fresh data
+  if (window.location.hash.startsWith('#/work/')) {
+    const slug = window.location.hash.replace('#/work/', '');
+    if (typeof renderWork === 'function') renderWork(slug);
+  }
+});
+
+// =====================================================
 // ROUTING — client-side hash routes
 // =====================================================
 const pageHome = document.getElementById('page-home');
@@ -3624,11 +3766,10 @@ function renderWork(slug) {
 
   // Hero
   document.getElementById('workHeroImg').className = 'work-hero-img';
-  // Apply fill via inline style to override
   const heroImg = document.getElementById('workHeroImg');
-  // Reset and apply
   heroImg.style.cssText = '';
-  // Apply gradient based on fill class
+
+  // Apply real image if available, otherwise fallback to CSS gradient
   const fillStyles = {
     'fill-1': 'background: radial-gradient(circle at 30% 35%, #C8B89D 0%, transparent 50%), radial-gradient(circle at 70% 70%, #3A3733 0%, transparent 60%), linear-gradient(135deg, #5A5048, #1F1D1A);',
     'fill-2': 'background: radial-gradient(circle at 50% 30%, #807870 0%, transparent 55%), radial-gradient(circle at 30% 80%, #2A2620 0%, transparent 60%), linear-gradient(135deg, #3A3733, #1F1D1A);',
@@ -3637,7 +3778,11 @@ function renderWork(slug) {
     'fill-5': 'background: radial-gradient(circle at 50% 65%, #C5FF3F 0%, transparent 35%), radial-gradient(circle at 20% 30%, #1F1D1A 0%, transparent 60%), linear-gradient(135deg, #3A3733, #1F1D1A);',
     'fill-6': 'background: radial-gradient(circle at 35% 45%, #807870 0%, transparent 45%), radial-gradient(circle at 75% 75%, #2A2620 0%, transparent 65%), linear-gradient(135deg, #14110D, #1F1D1A);'
   };
-  heroImg.setAttribute('style', fillStyles[w.fill] || fillStyles['fill-1']);
+  if (w.coverImage) {
+    heroImg.setAttribute('style', `background-image: url('${w.coverImage}'); background-size: cover; background-position: center;`);
+  } else {
+    heroImg.setAttribute('style', fillStyles[w.fill] || fillStyles['fill-1']);
+  }
 
   document.getElementById('workHeroNum').textContent = `№ ${w.num} / ${w.category}`;
   document.getElementById('workHeroTitle').innerHTML = `<span class="b">${w.bold}</span><br/><span class="it">${w.italic}</span>`;
@@ -4062,13 +4207,147 @@ tungsten. Cinestill 800T pushed +1, fine grain. 2.39:1.
   }
 ];
 
-// Loader function — single point of swap for production
+// Convert Sanity Portable Text → HTML matching the landing's body styles
+function portableTextToHtml(blocks) {
+  if (!Array.isArray(blocks)) return '';
+  const html = [];
+  let listBuffer = null; // {type: 'ul'|'ol', items: []}
+
+  function flushList() {
+    if (listBuffer) {
+      html.push(`<${listBuffer.type}>${listBuffer.items.map(i => `<li>${i}</li>`).join('')}</${listBuffer.type}>`);
+      listBuffer = null;
+    }
+  }
+
+  for (const block of blocks) {
+    if (block._type === 'image') {
+      flushList();
+      const url = sanityImageUrl(block, {w: 1200, q: 85, auto: 'format'});
+      const alt = block.alt || '';
+      const caption = block.caption ? `<figcaption>${block.caption}</figcaption>` : '';
+      if (url) html.push(`<figure><img src="${url}" alt="${alt}"/>${caption}</figure>`);
+      continue;
+    }
+    if (block._type === 'codeBlock') {
+      flushList();
+      let code = (block.code || '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      if (block.language === 'json') {
+        code = code.replace(/("[\w_]+")(\s*:)/g, '<span class="k">$1</span>$2');
+        code = code.replace(/:\s*("[^"]*")/g, ': <span class="s">$1</span>');
+      }
+      html.push(`<pre><code>${code}</code></pre>`);
+      continue;
+    }
+    if (block._type !== 'block') continue;
+
+    // Render text spans with marks
+    const inner = (block.children || []).map(child => {
+      if (child._type !== 'span') return '';
+      let text = (child.text || '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const marks = child.marks || [];
+      // Find link annotation if present
+      const linkKey = marks.find(m => block.markDefs?.some(d => d._key === m && d._type === 'link'));
+      const linkDef = linkKey ? block.markDefs.find(d => d._key === linkKey) : null;
+      if (marks.includes('em')) text = `<em>${text}</em>`;
+      if (marks.includes('strong')) text = `<strong>${text}</strong>`;
+      if (marks.includes('code')) text = `<code>${text}</code>`;
+      if (linkDef) text = `<a href="${linkDef.href}">${text}</a>`;
+      return text;
+    }).join('');
+
+    const style = block.style || 'normal';
+    const listItem = block.listItem;
+
+    if (listItem) {
+      const listType = listItem === 'number' ? 'ol' : 'ul';
+      if (!listBuffer || listBuffer.type !== listType) {
+        flushList();
+        listBuffer = {type: listType, items: []};
+      }
+      listBuffer.items.push(inner);
+      continue;
+    }
+
+    flushList();
+    if (style === 'h2') html.push(`<h2>${inner}</h2>`);
+    else if (style === 'h3') html.push(`<h3>${inner}</h3>`);
+    else if (style === 'blockquote') html.push(`<blockquote>${inner}</blockquote>`);
+    else html.push(`<p>${inner}</p>`);
+  }
+  flushList();
+  return html.join('\n');
+}
+
+// Format ISO date → "26 April 2026"
+function formatPostDate(dateStr) {
+  if (!dateStr) return '';
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                  'July', 'August', 'September', 'October', 'November', 'December'];
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+const CATEGORY_LABELS = {
+  'process': 'Process',
+  'workflow': 'Workflow',
+  'tool': 'Tool deep-dive',
+  'behind-the-drop': 'Behind the drop',
+  'prompt-pack': 'Prompt pack',
+  'essay': 'Editorial essay',
+};
+
+// Transform Sanity post → format the landing expects
+function transformSanityPost(p) {
+  const cover = p.cover ? sanityImageUrl(p.cover, {w: 1600, q: 85, auto: 'format'}) : null;
+  const bodyHtml = portableTextToHtml(p.body || []);
+  // Estimate readtime if not provided
+  let readtime = p.readtime;
+  if (!readtime) {
+    const words = bodyHtml.replace(/<[^>]+>/g, '').split(/\s+/).length;
+    readtime = `${Math.max(1, Math.round(words / 220))} min read`;
+  }
+  return {
+    slug: p.slug?.current || p.slug,
+    title_b: p.title_b || '',
+    title_it: p.title_it || '',
+    category: p.category || 'general',
+    categoryLabel: CATEGORY_LABELS[p.category] || p.category || 'General',
+    date: p.date || '',
+    dateFormatted: formatPostDate(p.date),
+    readtime,
+    excerpt: p.excerpt || '',
+    coverFill: 'fill-1', // fallback if no Sanity image
+    coverImage: cover,
+    tags: p.tags || [],
+    body: bodyHtml,
+    related: (p.related || []).map(r => r.slug?.current || r.slug).filter(Boolean),
+  };
+}
+
+// Loader function — fetches from Sanity with fallback to inline
 async function loadPosts() {
-  // ⬇️ TO ENABLE FILE-BASED LOADING in production, uncomment:
-  // try {
-  //   const r = await fetch('/posts.json');
-  //   if (r.ok) return await r.json();
-  // } catch (e) { console.warn('posts.json not found, falling back to inline'); }
+  const query = `*[_type == "post"] | order(date desc) {
+    _id,
+    title_b,
+    title_it,
+    "slug": slug.current,
+    category,
+    date,
+    excerpt,
+    cover,
+    readtime,
+    tags,
+    body,
+    "related": related[]->{ "slug": slug.current }
+  }`;
+  const result = await sanityFetch(query);
+  if (result && result.length > 0) {
+    return result.map(transformSanityPost);
+  }
   return inlinePosts;
 }
 
