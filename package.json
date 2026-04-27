@@ -1,14 +1,10 @@
 {
   "name": "artimind",
   "version": "1.0.0",
-  "description": "Artimind — A cinematic AI editorial studio. Landing page and blog system.",
+  "description": "Artimind — A cinematic AI editorial studio.",
   "private": true,
   "scripts": {
-    "build": "node build-posts.js",
     "build:posts": "node build-posts.js"
-  },
-  "engines": {
-    "node": ">=18"
   },
   "author": "Javier · Artimind Studio",
   "license": "UNLICENSED",
