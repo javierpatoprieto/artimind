@@ -3079,7 +3079,7 @@
       <span class="case-label">↳ The frames</span>
       <div>
         <p class="case-content">Eight variations generated. <em>Six killed.</em> Two refined. <span class="b">One published.</span></p>
-        <div class="frames-gallery">
+        <div class="frames-gallery" id="workFramesGallery">
           <div class="frame-mini"><div class="frame-mini-fill fill-1"></div><div class="frame-mini-num">001</div></div>
           <div class="frame-mini"><div class="frame-mini-fill fill-3"></div><div class="frame-mini-num">002</div></div>
           <div class="frame-mini"><div class="frame-mini-fill fill-2"></div><div class="frame-mini-num">003</div></div>
@@ -3862,6 +3862,27 @@ function renderWork(slug) {
   document.getElementById('workSpecsTable').innerHTML = Object.entries(w.specs).map(([k, v]) =>
     `<div class="spec"><div class="l">${k}</div><div class="v">${v}</div></div>`
   ).join('');
+
+  // Frames gallery — hydrate from Sanity galleryImages if available
+  const framesEl = document.getElementById('workFramesGallery');
+  if (framesEl) {
+    if (w.galleryImages && w.galleryImages.length > 0) {
+      framesEl.innerHTML = w.galleryImages.slice(0, 4).map((url, i) => `
+        <div class="frame-mini">
+          <div class="frame-mini-fill" style="background-image: url('${url}'); background-size: cover; background-position: center; background-color: var(--ink);"></div>
+          <div class="frame-mini-num">${String(i + 1).padStart(3, '0')}</div>
+        </div>
+      `).join('');
+    } else {
+      // Fallback to CSS gradient placeholders
+      framesEl.innerHTML = `
+        <div class="frame-mini"><div class="frame-mini-fill fill-1"></div><div class="frame-mini-num">001</div></div>
+        <div class="frame-mini"><div class="frame-mini-fill fill-3"></div><div class="frame-mini-num">002</div></div>
+        <div class="frame-mini"><div class="frame-mini-fill fill-2"></div><div class="frame-mini-num">003</div></div>
+        <div class="frame-mini"><div class="frame-mini-fill fill-4"></div><div class="frame-mini-num">004</div></div>
+      `;
+    }
+  }
 
   // Prev / Next
   const prevIdx = (idx - 1 + works.length) % works.length;
