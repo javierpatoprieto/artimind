@@ -4,7 +4,7 @@ title: "My workflow for an AI fashion campaign"
 path: "workflow-campana-moda"
 date: "2026-06-18"
 excerpt: "The step-by-step process I follow to take a collection from idea to final campaign without losing consistency."
-cover: "/img/model-1.jpg"
+cover: "/img/laundry.jpg"
 tags: ["Workflow", "Fashion"]
 readingTime: 6
 ---

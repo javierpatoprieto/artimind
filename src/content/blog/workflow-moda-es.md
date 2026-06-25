@@ -4,7 +4,7 @@ title: "Mi workflow para una campaña de moda con IA"
 path: "workflow-campana-moda"
 date: "2026-06-18"
 excerpt: "El proceso paso a paso que sigo para llevar una colección de la idea a la campaña final sin perder coherencia."
-cover: "/img/model-1.jpg"
+cover: "/img/laundry.jpg"
 tags: ["Workflow", "Moda"]
 readingTime: 6
 ---

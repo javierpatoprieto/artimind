@@ -4,7 +4,7 @@ title: "5 claves para prompts de fotografía de producto"
 path: "prompts-fotografia-producto"
 date: "2026-06-10"
 excerpt: "Lo que de verdad cambia un bodegón generado: luz, material, fondo, óptica y referencia. Con ejemplos."
-cover: "/img/perfume.jpg"
+cover: "/img/sunglasses.jpg"
 tags: ["Prompts", "Producto"]
 readingTime: 5
 ---

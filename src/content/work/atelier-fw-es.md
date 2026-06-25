@@ -6,8 +6,8 @@ client: "Atelier"
 year: "2026"
 category: "Moda"
 excerpt: "Editorial de campaña completa con modelos, estilismo y dirección de arte generados con IA."
-cover: "/img/model-1.jpg"
-images: ["/img/model-1.jpg", "/img/portrait.jpg", "/img/portrait-2.jpg", "/img/hero.jpg"]
+cover: "/img/rooftop.jpg"
+images: ["/img/rooftop.jpg", "/img/laundry.jpg", "/img/doorway.jpg", "/img/gas.jpg"]
 order: 1
 ---
 

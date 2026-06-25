@@ -4,7 +4,7 @@ title: "5 keys to product photography prompts"
 path: "prompts-fotografia-producto"
 date: "2026-06-10"
 excerpt: "What really changes a generated still life: light, material, background, optics and reference. With examples."
-cover: "/img/perfume.jpg"
+cover: "/img/sunglasses.jpg"
 tags: ["Prompts", "Product"]
 readingTime: 5
 ---

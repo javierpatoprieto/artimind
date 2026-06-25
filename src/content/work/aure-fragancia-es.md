@@ -6,8 +6,8 @@ client: "Auré"
 year: "2026"
 category: "Producto"
 excerpt: "Bodegones y escenas de producto con calidad de estudio de lujo para el lanzamiento de un perfume."
-cover: "/img/perfume.jpg"
-images: ["/img/perfume.jpg", "/img/perfume-2.jpg", "/img/cosmetic.jpg", "/img/cosmetic-2.jpg"]
+cover: "/img/sunglasses.jpg"
+images: ["/img/sunglasses.jpg", "/img/watch.jpg", "/img/oranges.jpg", "/img/pool.jpg"]
 order: 2
 ---
 

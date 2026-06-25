@@ -6,8 +6,8 @@ client: "Auré"
 year: "2026"
 category: "Product"
 excerpt: "Still life and product scenes with luxury studio quality for a perfume launch."
-cover: "/img/perfume.jpg"
-images: ["/img/perfume.jpg", "/img/perfume-2.jpg", "/img/cosmetic.jpg", "/img/cosmetic-2.jpg"]
+cover: "/img/sunglasses.jpg"
+images: ["/img/sunglasses.jpg", "/img/watch.jpg", "/img/oranges.jpg", "/img/pool.jpg"]
 order: 2
 ---
 
