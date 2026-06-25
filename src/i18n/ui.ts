@@ -17,15 +17,15 @@ export const ui = {
     "hero.eyebrow": "Estudio creativo de IA",
     "hero.title": "Imágenes que venden,",
     "hero.title.accent": "marcas que se recuerdan",
-    "hero.sub": "Soy ArtiMindArt. Convierto cualquier producto en imágenes y vídeos con calidad de gran producción. Sin sesiones de foto, sin límites y listo en días. Trabajo con marcas de todo tipo y soy especialista en moda y producto.",
-    "hero.cta": "Quiero mis visuales",
+    "hero.sub": "Estudio creativo de IA para moda y producto. Campañas, editoriales y vídeo con calidad de gran producción. En días, sin rodaje y sin límites.",
+    "hero.cta": "Empieza tu proyecto",
     "hero.cta2": "Ver proyectos",
 
     "proof": "El nivel de una gran productora. La agilidad de la IA.",
 
     "stats.title": "Crea más rápido. Lanza más fuerte.",
-    "stats.sub": "Producción visual con IA que reduce costes, acorta plazos y escala tus campañas sin perder calidad.",
-    "stats.cta": "Calcula tu ahorro",
+    "stats.sub": "Producción visual con IA que recorta costes, acorta plazos y escala tus campañas sin bajar el listón.",
+    "stats.cta": "Calcula lo que ahorras",
     "stats.1.k": "Flujo creativo sin fricción",
     "stats.1.b": "De la idea al visual final en una sola conversación, sin sesiones ni logística.",
     "stats.1.n": "70%",
@@ -41,7 +41,7 @@ export const ui = {
 
     "services.eyebrow": "Servicios",
     "services.title": "Todo lo que tu marca necesita para vender",
-    "services.sub": "Da igual tu sector: si vendes algo, necesitas que se vea increíble. Moda, producto y vídeo con calidad de estudio. Tú traes la visión; yo entrego las piezas.",
+    "services.sub": "Si vendes algo, tiene que verse extraordinario. Moda, producto y vídeo con acabado de estudio. Tú pones la visión; yo, las piezas.",
     "svc.more": "Ver servicio",
 
     "uses.eyebrow": "Casos de uso",
@@ -56,8 +56,8 @@ export const ui = {
     "use.4.b": "Tu producto sobre distintos modelos y escenas.",
 
     "work.eyebrow": "Proyectos",
-    "work.title": "Casos reales, resultados visibles",
-    "work.sub": "Una selección de trabajo en moda y producto. Todo creado con IA.",
+    "work.title": "Proyectos seleccionados",
+    "work.sub": "Moda y producto para marcas que no se conforman. Todo creado con IA.",
     "work.all": "Ver todos los proyectos",
     "work.view": "Ver proyecto",
     "work.client": "Cliente",
@@ -67,7 +67,7 @@ export const ui = {
 
     "blog.eyebrow": "Blog",
     "blog.title": "Workflows, prompts y trucos",
-    "blog.sub": "Comparto cómo trabajo: flujos de IA, prompts que funcionan y consejos para sacar el máximo a la imagen generativa.",
+    "blog.sub": "Cómo trabajo por dentro: flujos de IA, prompts que de verdad funcionan y trucos para exprimir la imagen generativa.",
     "blog.all": "Ver todos los artículos",
     "blog.read": "Leer artículo",
     "blog.featured": "Lo último del blog",
@@ -76,7 +76,7 @@ export const ui = {
 
     "magnific.eyebrow": "Alianza",
     "magnific.title": "Partner oficial de Magnific",
-    "magnific.body": "Trabajo con Magnific, la herramienta de referencia mundial en upscaling y mejora de imagen con IA. Para ti significa calidad real de impresión y campaña, nitidez extrema y resultados que aguantan la pantalla más grande.",
+    "magnific.body": "Trabajo con Magnific, el referente mundial en mejora de imagen con IA. Para ti se traduce en calidad de impresión, nitidez extrema y piezas que aguantan cualquier tamaño.",
     "magnific.cta": "Conocer Magnific",
 
     "bio.eyebrow": "El estudio",
@@ -86,14 +86,14 @@ export const ui = {
     "bio.cta": "Hablar conmigo",
     "bio.web": "Conóceme en javierpato.es",
 
-    "cta.title": "¿Listo para crear?",
-    "cta.sub": "Cuéntame tu proyecto por WhatsApp y te respondo el mismo día. O pregunta a mi asistente aquí mismo.",
-    "cta.wa": "WhatsApp directo",
+    "cta.title": "Tu próxima campaña empieza aquí",
+    "cta.sub": "Cuéntame tu idea por WhatsApp y te respondo el mismo día. Sin compromiso.",
+    "cta.wa": "Escríbeme por WhatsApp",
     "cta.chat": "Hablar con el asistente",
 
-    "contact.title": "Cuéntame tu proyecto",
-    "contact.body": "Escríbeme por WhatsApp y te respondo rápido. Si lo prefieres, mi asistente puede darte una primera idea de presupuesto y plazos.",
-    "contact.wa": "Escribir por WhatsApp",
+    "contact.title": "Hablemos de tu marca",
+    "contact.body": "Cuéntame tu idea por WhatsApp y te respondo el mismo día. Si lo prefieres, mi asistente te da una primera idea de plazos y presupuesto.",
+    "contact.wa": "Escríbeme por WhatsApp",
     "contact.chat": "Hablar con el asistente",
 
     "chat.title": "Asistente ArtiMindArt",
@@ -125,15 +125,15 @@ export const ui = {
     "hero.eyebrow": "AI Creative Studio",
     "hero.title": "Images that sell,",
     "hero.title.accent": "brands that stick",
-    "hero.sub": "I'm ArtiMindArt. I turn any product into images and videos with major-production quality. No photoshoots, no limits, ready in days. I work with brands of every kind and I specialize in fashion and product.",
-    "hero.cta": "I want my visuals",
+    "hero.sub": "AI creative studio for fashion and product. Campaigns, editorials and video with major-production quality. In days, with no shoot and no limits.",
+    "hero.cta": "Start your project",
     "hero.cta2": "View work",
 
     "proof": "The level of a major production house. The speed of AI.",
 
     "stats.title": "Create faster. Launch stronger.",
-    "stats.sub": "AI visual production that cuts costs, shortens timelines and scales your campaigns without losing quality.",
-    "stats.cta": "Calculate your savings",
+    "stats.sub": "AI visual production that cuts costs, shortens timelines and scales your campaigns without lowering the bar.",
+    "stats.cta": "See what you save",
     "stats.1.k": "Frictionless creative flow",
     "stats.1.b": "From idea to final visual in a single conversation, with no shoots or logistics.",
     "stats.1.n": "70%",
@@ -149,7 +149,7 @@ export const ui = {
 
     "services.eyebrow": "Services",
     "services.title": "Everything your brand needs to sell",
-    "services.sub": "Whatever your industry: if you sell something, it has to look incredible. Fashion, product and video with studio quality. You bring the vision; I deliver the pieces.",
+    "services.sub": "If you sell something, it has to look extraordinary. Fashion, product and video with studio finish. You bring the vision; I bring the pieces.",
     "svc.more": "View service",
 
     "uses.eyebrow": "Use cases",
@@ -164,8 +164,8 @@ export const ui = {
     "use.4.b": "Your product on different models and scenes.",
 
     "work.eyebrow": "Work",
-    "work.title": "Real cases, visible results",
-    "work.sub": "A selection of fashion and product work. All created with AI.",
+    "work.title": "Selected projects",
+    "work.sub": "Fashion and product for brands that don't settle. All created with AI.",
     "work.all": "View all projects",
     "work.view": "View project",
     "work.client": "Client",
@@ -175,7 +175,7 @@ export const ui = {
 
     "blog.eyebrow": "Blog",
     "blog.title": "Workflows, prompts and tips",
-    "blog.sub": "I share how I work: AI workflows, prompts that actually deliver, and tips to get the most out of generative imagery.",
+    "blog.sub": "How I actually work: AI workflows, prompts that truly deliver and tips to squeeze the most out of generative imagery.",
     "blog.all": "View all articles",
     "blog.read": "Read article",
     "blog.featured": "Latest from the blog",
@@ -184,7 +184,7 @@ export const ui = {
 
     "magnific.eyebrow": "Partnership",
     "magnific.title": "Official Magnific Partner",
-    "magnific.body": "I work with Magnific, the world's leading AI upscaling and image enhancement tool. For you that means real print and campaign quality, extreme sharpness, and results that hold up on the biggest screen.",
+    "magnific.body": "I work with Magnific, the world's leading AI image enhancement tool. For you, that means print quality, extreme sharpness and pieces that hold up at any size.",
     "magnific.cta": "Discover Magnific",
 
     "bio.eyebrow": "The studio",
@@ -194,14 +194,14 @@ export const ui = {
     "bio.cta": "Talk to me",
     "bio.web": "More about me at javierpato.es",
 
-    "cta.title": "Ready to create?",
-    "cta.sub": "Tell me about your project on WhatsApp and I'll reply the same day. Or ask my assistant right here.",
-    "cta.wa": "WhatsApp direct",
+    "cta.title": "Your next campaign starts here",
+    "cta.sub": "Tell me your idea on WhatsApp and I'll reply the same day. No strings attached.",
+    "cta.wa": "Message me on WhatsApp",
     "cta.chat": "Chat with the assistant",
 
-    "contact.title": "Tell me about your project",
-    "contact.body": "Message me on WhatsApp and I'll reply fast. If you prefer, my assistant can give you a first idea of budget and timing.",
-    "contact.wa": "Message on WhatsApp",
+    "contact.title": "Let's talk about your brand",
+    "contact.body": "Tell me your idea on WhatsApp and I'll reply the same day. If you prefer, my assistant gives you a first idea of timing and budget.",
+    "contact.wa": "Message me on WhatsApp",
     "contact.chat": "Chat with the assistant",
 
     "chat.title": "ArtiMindArt Assistant",

@@ -52,7 +52,7 @@ export const services: Record<Lang, Service[]> = {
     {
       slug: "video",
       title: "Spots de vídeo",
-      tagline: "Anuncios y piezas en movimiento con ritmo cinematográfico.",
+      tagline: "Anuncios y piezas en movimiento con alma de cine.",
       intro:
         "Del concepto al clip final para redes, web y campañas. Produzco spots con calidad de productora a una fracción del coste y del tiempo, en los formatos que cada canal necesita.",
       includes: [
@@ -108,7 +108,7 @@ export const services: Record<Lang, Service[]> = {
     {
       slug: "video",
       title: "Video spots",
-      tagline: "Ads and moving pieces with cinematic rhythm.",
+      tagline: "Ads and moving pieces with the soul of cinema.",
       intro:
         "From concept to final clip for social, web and campaigns. I produce spots with production-house quality at a fraction of the cost and time, in the formats each channel needs.",
       includes: [
