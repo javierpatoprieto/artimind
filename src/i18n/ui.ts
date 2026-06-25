@@ -258,4 +258,4 @@ export const CONTACT = {
   magnific: "https://magnific.ai",
 };
 
-export const SITE = "https://artimindart.com";
+export const SITE = "https://www.artimind.art";
