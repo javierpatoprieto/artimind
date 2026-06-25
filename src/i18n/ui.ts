@@ -81,9 +81,10 @@ export const ui = {
 
     "bio.eyebrow": "El estudio",
     "bio.title": "Soy ArtiMindArt",
-    "bio.p1": "El alter ego de IA detrás de una nueva forma de crear imagen para marcas. Mitad artista, mitad máquina, cien por cien al servicio de tu negocio.",
-    "bio.p2": "Trabajo con empresas de cualquier sector y soy especialista en moda y producto. No vendo humo ni prompts mágicos: vendo resultados. Visuales que convierten, plazos que se cumplen y una estética que hace que tu marca parezca más grande de lo que es.",
+    "bio.p1": "Detrás de ArtiMindArt está Javier Pato, diseñador de marca y web desde Cantabria. Llevo años ayudando a negocios a parecer lo que valen, trabajando como un estudio: una sola mano para todo, del concepto al detalle.",
+    "bio.p2": "ArtiMindArt es mi faceta de IA. Dirijo los modelos generativos con el criterio de un director de arte para crear imagen y vídeo de moda y producto. La IA como herramienta, nunca como estilo: por eso entrego en días, sin renunciar al acabado.",
     "bio.cta": "Hablar conmigo",
+    "bio.web": "Conóceme en javierpato.es",
 
     "cta.title": "¿Listo para crear?",
     "cta.sub": "Cuéntame tu proyecto por WhatsApp y te respondo el mismo día. O pregunta a mi asistente aquí mismo.",
@@ -188,9 +189,10 @@ export const ui = {
 
     "bio.eyebrow": "The studio",
     "bio.title": "I am ArtiMindArt",
-    "bio.p1": "The AI alter ego behind a new way of creating imagery for brands. Half artist, half machine, one hundred percent at the service of your business.",
-    "bio.p2": "I work with companies in any industry and I specialize in fashion and product. I don't sell hype or magic prompts: I sell results. Visuals that convert, deadlines that are met, and an aesthetic that makes your brand look bigger than it is.",
+    "bio.p1": "Behind ArtiMindArt is Javier Pato, a brand and web designer based in Cantabria, Spain. For years I've helped businesses look as good as they really are, working like a studio: one hand for everything, from concept to detail.",
+    "bio.p2": "ArtiMindArt is my AI side. I direct generative models with an art director's eye to create fashion and product imagery and video. AI as a tool, never as a style: that's why I deliver in days without compromising the finish.",
     "bio.cta": "Talk to me",
+    "bio.web": "More about me at javierpato.es",
 
     "cta.title": "Ready to create?",
     "cta.sub": "Tell me about your project on WhatsApp and I'll reply the same day. Or ask my assistant right here.",
@@ -256,6 +258,7 @@ export const CONTACT = {
   xHandle: "@artimindArt",
   email: "hola@artimindart.com",
   magnific: "https://magnific.ai",
+  web: "https://javierpato.es",
 };
 
 export const SITE = "https://www.artimind.art";
