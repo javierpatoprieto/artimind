@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Services from "../../components/Services.astro";
+import UseCases from "../../components/UseCases.astro";
+import StatsBand from "../../components/StatsBand.astro";
+import CTABand from "../../components/CTABand.astro";
+import { useTranslations } from "../../i18n/ui";
+const lang = "es" as const;
+const t = useTranslations(lang);
+---
+
+<Layout
+  lang={lang}
+  page="services"
+  title="Servicios — ArtiMindArt | Moda, producto y vídeo con IA"
+  description="Moda con modelos de IA, fotografía de producto y spots de vídeo. Calidad de estudio, sin sesiones de foto, listo en días."
+>
+  <PageHeader kicker={t("services.eyebrow")} title={t("services.title")} sub={t("services.sub")} />
+  <Services lang={lang} linkToDetail />
+  <UseCases lang={lang} />
+  <StatsBand lang={lang} />
+  <CTABand lang={lang} />
+</Layout>

@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import { useTranslations, routes, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const r = routes[lang];
+
+const posts = (await getCollection("blog", (e) => e.data.lang === lang))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date))
+  .slice(0, 2);
+---
+
+<section class="fp section">
+  <div class="wrap fp__head">
+    <span class="eyebrow" data-reveal>{t("blog.featured")}</span>
+    <a class="tlink fp__all" href={r.blog} data-reveal>{t("blog.all")} <span class="arrow">→</span></a>
+  </div>
+
+  <div class="wrap fp__grid">
+    {posts.map((p, i) => (
+      <a class="fp__card" href={`${r.blog}${p.data.path}/`} data-reveal style={`transition-delay:${i * 0.07}s`}>
+        <div class="fp__media"><img src={p.data.cover} alt={p.data.title} loading="lazy" /></div>
+        <div class="fp__meta">
+          <div class="fp__tags">{p.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+          <h3 class="fp__title">{p.data.title}</h3>
+          <p class="fp__excerpt">{p.data.excerpt}</p>
+          <span class="fp__read">{t("blog.read")} <span class="arrow">→</span></span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .fp { background: var(--bg-soft); }
+  .fp__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: clamp(2rem,4vw,3rem); border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; }
+  .fp__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem,3vw,2.5rem); }
+  .fp__card { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 1.2rem; align-items: center; }
+  .fp__media { aspect-ratio: 1; overflow: hidden; filter: grayscale(1); transition: filter 0.6s var(--ease); border: 1px solid var(--line); }
+  .fp__card:hover .fp__media { filter: grayscale(0); }
+  .fp__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+  .fp__card:hover .fp__media img { transform: scale(1.05); }
+  .fp__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .fp__title { font-size: clamp(1.2rem,1.6vw,1.6rem); margin-bottom: 0.5rem; line-height: 1.1; }
+  .fp__excerpt { color: var(--muted); font-size: 0.9rem; margin: 0 0 0.9rem; }
+  .fp__read { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; display: inline-flex; gap: 0.5em; align-items: center; }
+  .fp__read .arrow { transition: transform 0.4s var(--ease); }
+  .fp__card:hover .fp__read .arrow { transform: translateX(4px); }
+  @media (max-width: 860px) { .fp__grid { grid-template-columns: 1fr; } }
+  @media (max-width: 460px) { .fp__card { grid-template-columns: 1fr; } .fp__media { aspect-ratio: 16/10; } }
+</style>

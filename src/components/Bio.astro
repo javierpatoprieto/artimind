@@ -1,0 +1,36 @@
+---
+import { useTranslations, routes, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const r = routes[lang];
+---
+
+<section class="bio section" id="bio">
+  <div class="wrap bio__grid">
+    <div class="bio__media" data-reveal>
+      <img src="/img/javier-foto.png" alt="Javier — ArtiMindArt" loading="lazy" />
+      <span class="bio__badge">AI · 24/7</span>
+    </div>
+    <div class="bio__text">
+      <span class="eyebrow" data-reveal>{t("bio.eyebrow")}</span>
+      <h2 class="h-lg bio__title" data-reveal style="transition-delay:.05s">{t("bio.title")}</h2>
+      <p data-reveal style="transition-delay:.1s">{t("bio.p1")}</p>
+      <p data-reveal style="transition-delay:.15s">{t("bio.p2")}</p>
+      <a class="btn btn--light bio__cta" href={r.contact} data-reveal style="transition-delay:.2s">{t("bio.cta")} <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bio { background: var(--bg); padding-top: clamp(8rem, 13vw, 11rem); }
+  .bio__grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .bio__media { position: relative; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--line); filter: grayscale(1); transition: filter 0.7s var(--ease); }
+  .bio__media:hover { filter: grayscale(0); }
+  .bio__media img { width: 100%; height: 100%; object-fit: cover; }
+  .bio__badge { position: absolute; top: 0; left: 0; background: var(--ink); color: #fff; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; padding: 0.6em 1em; }
+  .bio__title { margin: 1rem 0 1.6rem; max-width: 14ch; }
+  .bio__text p { color: var(--muted); max-width: 52ch; margin: 0 0 1.2rem; }
+  .bio__cta { margin-top: 1rem; }
+  @media (max-width: 820px) { .bio__grid { grid-template-columns: 1fr; } .bio__media { max-width: 420px; } }
+</style>

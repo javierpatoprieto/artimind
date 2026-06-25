@@ -1,0 +1,63 @@
+---
+import { getCollection } from "astro:content";
+import { useTranslations, routes, type Lang } from "../i18n/ui";
+interface Props { lang: Lang; limit?: number; more?: boolean; heading?: boolean }
+const { lang, limit, more, heading = true } = Astro.props;
+const t = useTranslations(lang);
+const r = routes[lang];
+
+let items = (await getCollection("work", (e) => e.data.lang === lang))
+  .sort((a, b) => a.data.order - b.data.order);
+if (limit) items = items.slice(0, limit);
+---
+
+<section class="wg section" id="work">
+  {heading && (
+    <div class="wrap wg__head">
+      <span class="eyebrow" data-reveal>{t("work.eyebrow")}</span>
+      <h2 class="h-lg" data-reveal style="transition-delay:.05s">{t("work.title")}</h2>
+      <p class="wg__sub" data-reveal style="transition-delay:.1s">{t("work.sub")}</p>
+    </div>
+  )}
+
+  <div class="wrap wrap--wide wg__grid">
+    {items.map((p, i) => (
+      <a class="wg__card" href={`${r.work}${p.data.path}/`} data-reveal style={`transition-delay:${(i % 3) * 0.07}s`}>
+        <div class="wg__media"><img src={p.data.cover} alt={p.data.title} loading="lazy" /></div>
+        <div class="wg__meta">
+          <div class="wg__row">
+            <span class="wg__cat">{p.data.category}</span>
+            <span class="wg__year">{p.data.year}</span>
+          </div>
+          <h3 class="wg__name">{p.data.title}</h3>
+          <p class="wg__excerpt">{p.data.excerpt}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  {more && (
+    <div class="wrap wg__cta" data-reveal>
+      <a class="btn btn--light" href={r.work}>{t("work.all")} <span class="arrow">→</span></a>
+    </div>
+  )}
+</section>
+
+<style>
+  .wg { background: var(--bg); }
+  .wg__head { display: grid; gap: 1rem; max-width: 50ch; margin: 0 0 clamp(2.5rem,5vw,3.5rem); }
+  .wg__sub { color: var(--muted); }
+  .wg__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem,2.5vw,2.4rem); }
+  .wg__card { display: flex; flex-direction: column; }
+  .wg__media { aspect-ratio: 4/5; overflow: hidden; filter: grayscale(1); transition: filter 0.6s var(--ease); border: 1px solid var(--line); }
+  .wg__card:hover .wg__media { filter: grayscale(0); }
+  .wg__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+  .wg__card:hover .wg__media img { transform: scale(1.04); }
+  .wg__meta { padding-top: 1.1rem; }
+  .wg__row { display: flex; justify-content: space-between; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+  .wg__name { font-size: clamp(1.3rem,1.6vw,1.7rem); margin-bottom: 0.5rem; }
+  .wg__excerpt { color: var(--muted); font-size: 0.92rem; margin: 0; }
+  .wg__cta { display: flex; justify-content: center; margin-top: clamp(2.5rem,5vw,3.5rem); }
+  @media (max-width: 900px) { .wg__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .wg__grid { grid-template-columns: 1fr; } }
+</style>

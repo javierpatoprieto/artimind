@@ -1,0 +1,62 @@
+---
+import { useTranslations, routes, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const r = routes[lang];
+---
+
+<section class="hero" id="top">
+  <div class="hero__bg" aria-hidden="true">
+    <video autoplay muted loop playsinline poster="/img/hero.jpg" preload="metadata">
+      <source src="/video/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__scrim"></div>
+  </div>
+
+  <div class="wrap wrap--wide hero__inner">
+    <span class="eyebrow hero__eyebrow" data-reveal>{t("hero.eyebrow")}</span>
+    <h1 class="h-xl hero__title" data-reveal style="transition-delay:.05s">
+      {t("hero.title")} <span class="italic">{t("hero.title.accent")}</span>
+    </h1>
+    <p class="hero__sub" data-reveal style="transition-delay:.1s">{t("hero.sub")}</p>
+    <div class="hero__cta" data-reveal style="transition-delay:.15s">
+      <a class="btn btn--dark" href={r.contact}>{t("hero.cta")} <span class="arrow">→</span></a>
+      <a class="btn btn--on-dark" href={r.work}>{t("hero.cta2")}</a>
+    </div>
+  </div>
+
+  <span class="hero__index" aria-hidden="true">ARTIMINDART — AI STUDIO</span>
+</section>
+<span id="after-hero"></span>
+
+<style>
+  .hero {
+    position: relative; min-height: clamp(580px, 94vh, 1040px);
+    display: flex; align-items: flex-end;
+    padding-block: 8rem clamp(3.5rem, 6vw, 6rem);
+    overflow: hidden; color: #fff;
+  }
+  .hero__bg { position: absolute; inset: 0; z-index: 0; background: var(--ink); }
+  .hero__bg video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+  .hero__scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,.45) 0%, rgba(10,10,10,.1) 40%, rgba(10,10,10,.78) 100%);
+  }
+  .hero__inner { position: relative; z-index: 2; width: 100%; max-width: 60rem; }
+  .hero__eyebrow { color: #fff; }
+  .hero__eyebrow::before { background: #fff; }
+  .hero__title { margin-top: 1.6rem; max-width: 18ch; }
+  .hero__sub {
+    max-width: 50ch; margin-top: 1.6rem;
+    font-size: clamp(1.05rem, 1rem + 0.45vw, 1.3rem); line-height: 1.55;
+    color: rgba(255,255,255,.85); font-weight: 400;
+  }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.4rem; }
+  .hero__index {
+    position: absolute; bottom: 1.6rem; right: var(--pad); z-index: 2;
+    font-size: 0.68rem; letter-spacing: 0.2em; color: rgba(255,255,255,.55);
+  }
+  @media (prefers-reduced-motion: reduce) { .hero__bg video { display: none; } }
+  @media (max-width: 640px) { .hero__index { display: none; } }
+</style>

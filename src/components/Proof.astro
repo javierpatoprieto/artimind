@@ -1,0 +1,33 @@
+---
+import { useTranslations, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const brands = ["ATELIER", "NORDA", "LUMA", "VESTRA", "AURÉ", "MODE&CO", "STUDIO 9"];
+---
+
+<section class="proof">
+  <div class="wrap proof__head">
+    <span class="eyebrow proof__eyebrow">{lang === "es" ? "Confían en la IA" : "They trust AI"}</span>
+    <p class="proof__claim">{t("proof")}</p>
+  </div>
+  <div class="proof__strip" aria-hidden="true">
+    <div class="proof__track">
+      {[...brands, ...brands].map((b) => <span class="proof__logo">{b}</span>)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proof { background: var(--ink); color: #fff; padding-block: clamp(3rem, 6vw, 5rem); }
+  .proof__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.8rem 2rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+  .proof__eyebrow { color: #fff; }
+  .proof__eyebrow::before { background: #fff; }
+  .proof__claim { font-family: var(--font-display); font-size: clamp(1.4rem, 1rem + 1.8vw, 2.4rem); color: #fff; margin: 0; max-width: 24ch; }
+  .proof__strip { overflow: hidden; border-top: 1px solid rgba(255,255,255,.16); border-bottom: 1px solid rgba(255,255,255,.16); padding-block: clamp(1.6rem, 3vw, 2.4rem); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .proof__track { display: flex; gap: clamp(2.5rem, 6vw, 5rem); width: max-content; animation: proofScroll 30s linear infinite; }
+  .proof__logo { font-family: var(--font-display); font-size: clamp(1.3rem, 1.6vw, 1.9rem); letter-spacing: 0.02em; color: #fff; opacity: 0.55; white-space: nowrap; transition: opacity 0.3s; }
+  .proof__logo:hover { opacity: 1; }
+  @keyframes proofScroll { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .proof__track { animation: none; flex-wrap: wrap; } }
+</style>

@@ -1,0 +1,60 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import CTABand from "../../../components/CTABand.astro";
+import { useTranslations, routes, SITE } from "../../../i18n/ui";
+
+export async function getStaticPaths() {
+  const items = await getCollection("blog", (e) => e.data.lang === "es");
+  return items.map((entry) => ({ params: { slug: entry.data.path }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const d = entry.data;
+const lang = "es" as const;
+const t = useTranslations(lang);
+const r = routes[lang];
+
+const jsonld = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: d.title,
+  description: d.excerpt,
+  datePublished: d.date,
+  image: SITE + d.cover,
+  author: { "@type": "Person", name: "Javier — ArtiMindArt" },
+  publisher: { "@type": "Organization", name: "ArtiMindArt", url: SITE },
+};
+---
+
+<Layout lang={lang} page="blog" title={`${d.title} — ArtiMindArt`} description={d.excerpt} ogImage={d.cover} jsonld={jsonld}>
+  <article class="post">
+    <div class="wrap post__head">
+      <a class="post__back" href={r.blog}>← {t("blog.back")}</a>
+      <div class="post__tags">{d.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+      <h1 class="h-xl post__title" data-reveal>{d.title}</h1>
+      <p class="post__meta">{new Date(d.date).toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" })} · {d.readingTime} {t("blog.min")}</p>
+    </div>
+    <div class="post__cover" data-reveal><img src={d.cover} alt={d.title} /></div>
+    <div class="wrap post__body">
+      <div class="post__prose"><Content /></div>
+    </div>
+  </article>
+  <CTABand lang={lang} />
+</Layout>
+
+<style>
+  .post__head { padding-top: clamp(8.5rem,14vw,12rem); padding-bottom: clamp(2rem,4vw,3rem); max-width: 60rem; }
+  .post__back { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .post__back:hover { color: var(--ink); }
+  .post__tags { display: flex; gap: 0.4rem; margin: 1.6rem 0 1.2rem; }
+  .post__title { max-width: 20ch; }
+  .post__meta { margin-top: 1.2rem; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .post__cover { aspect-ratio: 16/9; overflow: hidden; margin-bottom: clamp(2.5rem,5vw,4rem); }
+  .post__cover img { width: 100%; height: 100%; object-fit: cover; }
+  .post__body { display: flex; justify-content: center; padding-bottom: clamp(3rem,6vw,5rem); }
+  .post__prose { max-width: 62ch; font-size: 1.08rem; }
+  .post__prose :global(h2) { font-family: var(--font-display); font-size: 1.7rem; margin: 2.4rem 0 0.8rem; }
+  .post__prose :global(p) { color: var(--ink-2); margin: 0 0 1.3rem; }
+  .post__prose :global(a) { border-bottom: 1px solid var(--ink); }
+</style>

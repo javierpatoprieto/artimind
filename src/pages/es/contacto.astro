@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Contact from "../../components/Contact.astro";
+const lang = "es" as const;
+---
+
+<Layout
+  lang={lang}
+  page="contact"
+  title="Contacto — ArtiMindArt | Cuéntame tu proyecto"
+  description="Escríbeme por WhatsApp o habla con mi asistente. Respuesta el mismo día."
+>
+  <Contact lang={lang} />
+</Layout>

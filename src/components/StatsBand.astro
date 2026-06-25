@@ -1,0 +1,53 @@
+---
+import { useTranslations, routes, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const r = routes[lang];
+const cols = [
+  { k: t("stats.1.k"), b: t("stats.1.b"), n: t("stats.1.n"), f: t("stats.1.f") },
+  { k: t("stats.2.k"), b: t("stats.2.b"), n: t("stats.2.n"), f: t("stats.2.f") },
+  { k: t("stats.3.k"), b: t("stats.3.b"), n: t("stats.3.n"), f: t("stats.3.f") },
+];
+---
+
+<section class="sb section">
+  <div class="wrap sb__head">
+    <h2 class="h-lg sb__title" data-reveal>{t("stats.title")}</h2>
+    <p class="sb__sub" data-reveal style="transition-delay:.05s">{t("stats.sub")}</p>
+    <a class="btn btn--dark sb__cta" href={r.contact} data-reveal style="transition-delay:.1s">{t("stats.cta")} <span class="arrow">↗</span></a>
+  </div>
+
+  <div class="wrap wrap--wide sb__grid">
+    {cols.map((c, i) => (
+      <article class="sb__col" data-reveal style={`transition-delay:${i * 0.07}s`}>
+        <h3 class="sb__k">{c.k}</h3>
+        <p class="sb__b">{c.b}</p>
+        <div class="sb__n">{c.n}</div>
+        <p class="sb__f">{c.f}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .sb { background: var(--bg-soft); padding-block: clamp(4rem,7vw,6.5rem) clamp(3rem,5vw,4rem); }
+  .sb__head { display: grid; place-items: center; text-align: center; gap: 1.3rem; max-width: 44ch; margin: 0 auto clamp(2.5rem,5vw,4rem); }
+  .sb__sub { color: var(--muted); font-size: clamp(1.02rem,1rem+0.3vw,1.2rem); }
+  .sb__cta .arrow { font-size: 0.9em; }
+
+  .sb__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+  .sb__col { display: flex; flex-direction: column; padding: clamp(2rem,3vw,2.6rem) clamp(1.4rem,2.4vw,2.4rem) 0 0; border-right: 1px solid var(--line); }
+  .sb__col:last-child { border-right: 0; padding-right: 0; }
+  .sb__k { font-family: var(--font); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.2rem; max-width: 22ch; line-height: 1.4; min-height: 2.8em; }
+  .sb__b { color: var(--muted); font-size: 0.95rem; margin: 0 0 2.2rem; max-width: 34ch; min-height: 3em; }
+  .sb__n { font-family: var(--font-display); font-size: clamp(3rem, 2rem + 4vw, 5.5rem); line-height: 0.9; letter-spacing: -0.03em; margin-top: auto; }
+  .sb__f { font-size: 0.82rem; color: var(--muted); margin: 0.9rem 0 0; max-width: 30ch; }
+  @media (min-width: 821px) { .sb__f { min-height: 2.4em; } }
+
+  @media (max-width: 820px) {
+    .sb__grid { grid-template-columns: 1fr; }
+    .sb__col { border-right: 0; border-bottom: 1px solid var(--line); padding-right: 0; }
+    .sb__col:last-child { border-bottom: 0; }
+  }
+</style>

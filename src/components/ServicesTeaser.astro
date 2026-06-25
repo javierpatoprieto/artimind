@@ -1,0 +1,60 @@
+---
+import { useTranslations, routes, type Lang } from "../i18n/ui";
+import { serviceTeasers } from "../data/services";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const r = routes[lang];
+const covers = ["/img/model-1.jpg", "/img/perfume.jpg", "/img/portrait-2.jpg"];
+const cards = serviceTeasers(lang).map((s, i) => ({ ...s, img: covers[i] }));
+---
+
+<section class="st section" id="after-hero">
+  <div class="wrap st__head">
+    <span class="eyebrow" data-reveal>{t("services.eyebrow")}</span>
+    <h2 class="h-lg st__title" data-reveal style="transition-delay:.05s">{t("services.title")}</h2>
+    <p class="st__sub" data-reveal style="transition-delay:.1s">{t("services.sub")}</p>
+  </div>
+
+  <div class="wrap wrap--wide st__grid">
+    {cards.map((c, i) => (
+      <a class="st__card" href={`${r.services}${c.slug}/`} data-reveal style={`transition-delay:${i * 0.07}s`}>
+        <div class="st__media">
+          <img src={c.img} alt={c.title} loading="lazy" />
+          <span class="st__n">{c.n}</span>
+        </div>
+        <div class="st__body">
+          <h3 class="st__name">{c.title}</h3>
+          <p class="st__desc">{c.tagline}</p>
+          <span class="st__arrow">{t("svc.more")} <span class="arrow">→</span></span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .st { background: var(--bg); }
+  .st__head { display: grid; gap: 1rem; max-width: 52ch; margin: 0 0 clamp(2.5rem,5vw,3.5rem); }
+  .st__sub { color: var(--muted); }
+  .st__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+  .st__card { display: flex; flex-direction: column; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background 0.4s var(--ease); }
+  .st__card:first-child { border-left: 1px solid var(--line); }
+  .st__card:hover { background: var(--bg-soft); }
+  .st__media { position: relative; aspect-ratio: 4/5; overflow: hidden; filter: grayscale(1); transition: filter 0.6s var(--ease); }
+  .st__card:hover .st__media { filter: grayscale(0); }
+  .st__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease); }
+  .st__card:hover .st__media img { transform: scale(1.04); }
+  .st__n { position: absolute; top: 1rem; left: 1rem; font-family: var(--font-display); font-size: 1.1rem; color: #fff; mix-blend-mode: difference; }
+  .st__body { padding: clamp(1.5rem, 2.2vw, 2.2rem); display: flex; flex-direction: column; gap: 0.9rem; flex: 1; }
+  .st__name { font-size: clamp(1.4rem,1.8vw,1.8rem); }
+  .st__desc { color: var(--muted); font-size: 0.92rem; margin: 0; flex: 1; }
+  .st__arrow { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; display: inline-flex; gap: 0.5em; align-items: center; }
+  .st__arrow .arrow { transition: transform 0.4s var(--ease); }
+  .st__card:hover .st__arrow .arrow { transform: translateX(4px); }
+  @media (max-width: 860px) {
+    .st__grid { grid-template-columns: 1fr; }
+    .st__card { border-left: 1px solid var(--line); }
+    .st__media { aspect-ratio: 16/10; }
+  }
+</style>

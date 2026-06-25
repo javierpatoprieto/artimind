@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import PageHeader from "../../../components/PageHeader.astro";
+import CTABand from "../../../components/CTABand.astro";
+import { useTranslations, routes } from "../../../i18n/ui";
+const lang = "en" as const;
+const t = useTranslations(lang);
+const r = routes[lang];
+const posts = (await getCollection("blog", (e) => e.data.lang === lang))
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+
+<Layout
+  lang={lang}
+  page="blog"
+  title="Blog — ArtiMindArt | AI workflows, prompts and tips"
+  description="AI workflows, prompts that work and tips to get the most out of generative image and video."
+>
+  <PageHeader kicker={t("blog.eyebrow")} title={t("blog.title")} sub={t("blog.sub")} />
+  <section class="bl section">
+    <div class="wrap wrap--wide bl__grid">
+      {posts.map((p, i) => (
+        <a class="bl__card" href={`${r.blog}${p.data.path}/`} data-reveal style={`transition-delay:${(i % 3) * 0.07}s`}>
+          <div class="bl__media"><img src={p.data.cover} alt={p.data.title} loading="lazy" /></div>
+          <div class="bl__tags">{p.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+          <h2 class="bl__title">{p.data.title}</h2>
+          <p class="bl__excerpt">{p.data.excerpt}</p>
+          <span class="bl__min">{p.data.readingTime} {t("blog.min")}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+  <CTABand lang={lang} />
+</Layout>
+
+<style>
+  .bl__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem,3vw,2.5rem); }
+  .bl__card { display: flex; flex-direction: column; }
+  .bl__media { aspect-ratio: 3/2; overflow: hidden; filter: grayscale(1); transition: filter 0.6s var(--ease); border: 1px solid var(--line); margin-bottom: 1.1rem; }
+  .bl__card:hover .bl__media { filter: grayscale(0); }
+  .bl__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+  .bl__card:hover .bl__media img { transform: scale(1.04); }
+  .bl__tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .bl__title { font-size: clamp(1.3rem,1.6vw,1.7rem); margin-bottom: 0.5rem; line-height: 1.12; }
+  .bl__excerpt { color: var(--muted); font-size: 0.92rem; margin: 0 0 0.9rem; flex: 1; }
+  .bl__min { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  @media (max-width: 900px) { .bl__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .bl__grid { grid-template-columns: 1fr; } }
+</style>

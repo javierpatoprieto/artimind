@@ -1,0 +1,20 @@
+---
+interface Props { kicker: string; title: string; sub?: string }
+const { kicker, title, sub } = Astro.props;
+---
+
+<section class="ph">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>{kicker}</span>
+    <h1 class="h-xl ph__title" data-reveal style="transition-delay:.05s">{title}</h1>
+    {sub && <p class="ph__sub" data-reveal style="transition-delay:.1s">{sub}</p>}
+  </div>
+  <hr class="rule ph__rule" />
+</section>
+
+<style>
+  .ph { padding-top: clamp(8.5rem, 14vw, 12rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .ph__title { margin-top: 1.4rem; max-width: 16ch; }
+  .ph__sub { margin-top: 1.4rem; max-width: 56ch; color: var(--muted); font-size: clamp(1.05rem,1rem+0.4vw,1.25rem); }
+  .ph__rule { margin-top: clamp(2.5rem,5vw,4rem); }
+</style>

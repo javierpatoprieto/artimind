@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Contact from "../../components/Contact.astro";
+const lang = "en" as const;
+---
+
+<Layout
+  lang={lang}
+  page="contact"
+  title="Contact — ArtiMindArt | Tell me about your project"
+  description="Message me on WhatsApp or talk to my assistant. Same-day reply."
+>
+  <Contact lang={lang} />
+</Layout>

@@ -1,0 +1,202 @@
+---
+import { useTranslations, type Lang, CONTACT } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="cw" id="chat-widget" data-lang={lang} data-wa={CONTACT.whatsapp}>
+  <button class="cw__fab" id="cw-fab" aria-label={t("chat.title")}>
+    <svg class="cw__ico" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </button>
+
+  <div class="cw__panel" id="cw-panel" hidden>
+    <header class="cw__head">
+      <div class="cw__avatar">A</div>
+      <div>
+        <strong>{t("chat.title")}</strong>
+        <small>{t("chat.sub")}</small>
+      </div>
+      <button class="cw__close" id="cw-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="cw__log" id="cw-log" aria-live="polite"></div>
+
+    <div class="cw__quick" id="cw-quick"></div>
+
+    <form class="cw__form" id="cw-form">
+      <input id="cw-input" type="text" placeholder={t("chat.placeholder")} autocomplete="off" />
+      <button type="submit" aria-label={t("chat.send")}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<script define:vars={{ lang, greeting: t("chat.greeting"), toWa: t("chat.toWa") }}>
+  const root = document.getElementById("chat-widget");
+  const fab = document.getElementById("cw-fab");
+  const panel = document.getElementById("cw-panel");
+  const close = document.getElementById("cw-close");
+  const log = document.getElementById("cw-log");
+  const quick = document.getElementById("cw-quick");
+  const form = document.getElementById("cw-form");
+  const input = document.getElementById("cw-input");
+  const wa = root.dataset.wa;
+
+  const isEs = lang === "es";
+  const L = {
+    options: isEs
+      ? ["Moda 👗", "Producto 📦", "Spot de vídeo 🎬", "Presupuesto 💸"]
+      : ["Fashion 👗", "Product 📦", "Video spot 🎬", "Budget 💸"],
+    answers: {
+      0: isEs
+        ? "Moda es lo mío: editoriales, lookbooks y campañas con modelos y estilismo de IA. ¿Me cuentas la marca y la prenda/colección?"
+        : "Fashion is my thing: editorials, lookbooks and campaigns with AI models and styling. Tell me about the brand and the garment/collection?",
+      1: isEs
+        ? "Producto: bodegones y packshots de nivel estudio de lujo. ¿Qué producto es (cosmética, bebida, tech…)?"
+        : "Product: luxury studio-grade still life and packshots. What's the product (cosmetics, drink, tech…)?",
+      2: isEs
+        ? "Spots de vídeo con ritmo cinematográfico para redes y campañas. ¿Duración aprox. y dónde lo vas a usar?"
+        : "Cinematic video spots for social and campaigns. Roughly how long and where will you use it?",
+      3: isEs
+        ? "El precio depende del volumen y los usos. Para darte una cifra real, lo mejor es que sigamos por WhatsApp con un par de detalles. 👇"
+        : "Pricing depends on volume and usage. For a real number, let's continue on WhatsApp with a couple of details. 👇",
+    },
+    fallback: isEs
+      ? "¡Buenísimo! Para darte plazos y presupuesto exacto seguimos por WhatsApp, así Javier te responde directo. 👇"
+      : "Great! For exact timing and budget let's move to WhatsApp so Javier replies directly. 👇",
+  };
+
+  let opened = false;
+  function add(text, who = "bot") {
+    const el = document.createElement("div");
+    el.className = `cw__msg cw__msg--${who}`;
+    el.textContent = text;
+    log.appendChild(el);
+    log.scrollTop = log.scrollHeight;
+  }
+  function waLink(extra) {
+    const base = isEs ? "Hola ArtiMindArt, vengo de la web. " : "Hi ArtiMindArt, coming from the site. ";
+    return `https://wa.me/${wa}?text=${encodeURIComponent(base + (extra || ""))}`;
+  }
+  function addWaButton() {
+    const a = document.createElement("a");
+    a.className = "cw__wa";
+    a.href = waLink("");
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = toWa + " »";
+    log.appendChild(a);
+    log.scrollTop = log.scrollHeight;
+  }
+  function renderQuick() {
+    quick.innerHTML = "";
+    L.options.forEach((opt, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "cw__chip";
+      b.textContent = opt;
+      b.addEventListener("click", () => {
+        add(opt, "user");
+        quick.innerHTML = "";
+        setTimeout(() => { add(L.answers[i]); addWaButton(); }, 420);
+      });
+      quick.appendChild(b);
+    });
+  }
+  function openPanel() {
+    panel.hidden = false;
+    fab.classList.add("is-open");
+    if (!opened) {
+      opened = true;
+      setTimeout(() => { add(greeting); renderQuick(); }, 250);
+    }
+  }
+  function closePanel() { panel.hidden = true; fab.classList.remove("is-open"); }
+
+  fab.addEventListener("click", () => (panel.hidden ? openPanel() : closePanel()));
+  close.addEventListener("click", closePanel);
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = input.value.trim();
+    if (!v) return;
+    add(v, "user");
+    input.value = "";
+    quick.innerHTML = "";
+    setTimeout(() => { add(L.fallback); addWaButton(); }, 420);
+  });
+
+  // Allow "open chat" button in contact section
+  document.getElementById("open-chat")?.addEventListener("click", () => { openPanel(); root.scrollIntoView?.(); });
+</script>
+
+<style>
+  .cw { position: fixed; right: clamp(1rem, 3vw, 2rem); bottom: clamp(1rem, 3vw, 2rem); z-index: 200; }
+  .cw__fab {
+    position: relative;
+    width: 62px; height: 62px; border-radius: 50%;
+    border: 1px solid var(--ink); cursor: pointer; color: #fff;
+    background: var(--ink);
+    display: grid; place-items: center;
+    transition: background 0.35s var(--ease), color 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .cw__fab:hover { background: #fff; color: var(--ink); transform: scale(1.05); }
+  .cw__ico { display: block; transform: translateY(-1px); }
+
+  .cw__panel {
+    position: absolute; right: 0; bottom: 72px;
+    width: min(360px, 86vw); height: min(520px, 70vh);
+    background: #fff; color: var(--ink);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    border: 1px solid var(--ink);
+    animation: cwIn 0.4s var(--ease);
+  }
+  .cw__panel[hidden] { display: none; }
+  @keyframes cwIn { from { opacity: 0; transform: translateY(20px); } }
+  .cw__head {
+    display: flex; align-items: center; gap: 0.7rem;
+    padding: 0.9rem 1rem; background: var(--ink); color: #fff;
+  }
+  .cw__head strong { display: block; font-size: 0.9rem; font-weight: 600; }
+  .cw__head small { opacity: 0.65; font-size: 0.74rem; }
+  .cw__avatar {
+    width: 36px; height: 36px; flex: none;
+    display: grid; place-items: center; background: #fff; color: var(--ink);
+    font-family: var(--font-display); font-size: 1.1rem;
+  }
+  .cw__close { margin-left: auto; background: none; border: 0; color: #fff; font-size: 1.5rem; cursor: pointer; line-height: 1; }
+
+  .cw__log { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .cw__msg { max-width: 86%; padding: 0.65rem 0.9rem; font-size: 0.88rem; line-height: 1.45; }
+  .cw__msg--bot { background: var(--bg-soft); border: 1px solid var(--line); align-self: flex-start; }
+  .cw__msg--user { background: var(--ink); color: #fff; align-self: flex-end; }
+  .cw__wa {
+    align-self: flex-start; margin-top: 0.2rem;
+    background: var(--ink); color: #fff; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.72rem;
+    padding: 0.7rem 1.1rem; border: 1px solid var(--ink);
+  }
+
+  .cw__quick { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0 1rem; }
+  .cw__chip {
+    border: 1px solid var(--ink); color: var(--ink);
+    background: transparent;
+    padding: 0.45rem 0.8rem; font-size: 0.78rem; cursor: pointer;
+    font-family: inherit; transition: background 0.25s, color 0.25s;
+  }
+  .cw__chip:hover { background: var(--ink); color: #fff; }
+
+  .cw__form { display: flex; gap: 0.5rem; padding: 0.8rem 1rem 1rem; }
+  .cw__form input {
+    flex: 1; border: 1px solid var(--line-2);
+    padding: 0.7rem 0.9rem; font-family: inherit; font-size: 0.88rem;
+    background: #fff; color: var(--ink);
+  }
+  .cw__form input:focus { outline: 1px solid var(--ink); border-color: var(--ink); }
+  .cw__form button {
+    width: 44px; flex: none; border: 1px solid var(--ink); cursor: pointer;
+    background: var(--ink); color: #fff; display: grid; place-items: center;
+  }
+</style>

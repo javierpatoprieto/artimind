@@ -1,0 +1,47 @@
+---
+import { useTranslations, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const items = [
+  { n: "01", t: t("use.1.t"), b: t("use.1.b") },
+  { n: "02", t: t("use.2.t"), b: t("use.2.b") },
+  { n: "03", t: t("use.3.t"), b: t("use.3.b") },
+  { n: "04", t: t("use.4.t"), b: t("use.4.b") },
+];
+---
+
+<section class="uses section">
+  <div class="wrap uses__head">
+    <span class="eyebrow" data-reveal>{t("uses.eyebrow")}</span>
+    <h2 class="h-lg" data-reveal style="transition-delay:.05s">{t("uses.title")}</h2>
+  </div>
+  <div class="wrap uses__grid">
+    {items.map((it, i) => (
+      <article class="use" data-reveal style={`transition-delay:${i * 0.05}s`}>
+        <span class="use__n">{it.n}</span>
+        <h3 class="use__t">{it.t}</h3>
+        <p>{it.b}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .uses { background: var(--ink); color: #fff; }
+  .uses__head { display: grid; gap: 1rem; margin-bottom: clamp(2.5rem,5vw,3.5rem); }
+  .uses__head .eyebrow { color: #fff; }
+  .uses__head .eyebrow::before { background: #fff; }
+  .uses__grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.18); }
+  .use { padding: clamp(1.6rem,2.4vw,2.4rem) clamp(1.2rem,2vw,1.8rem) clamp(2rem,3vw,2.6rem) 0; border-right: 1px solid rgba(255,255,255,.18); }
+  .use:last-child { border-right: 0; }
+  .use__n { display: block; font-family: var(--font-display); font-size: 1rem; color: rgba(255,255,255,.5); margin-bottom: 1.4rem; }
+  .use__t { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .use p { color: rgba(255,255,255,.65); font-size: 0.92rem; margin: 0; }
+  @media (max-width: 860px) {
+    .uses__grid { grid-template-columns: 1fr 1fr; }
+    .use { border-bottom: 1px solid rgba(255,255,255,.18); padding-left: clamp(1rem,2vw,1.5rem); padding-right: clamp(1rem,2vw,1.5rem); }
+    .use:nth-child(even) { border-right: 0; }
+  }
+  @media (max-width: 480px) { .uses__grid { grid-template-columns: 1fr; } .use { border-right: 0; } }
+</style>

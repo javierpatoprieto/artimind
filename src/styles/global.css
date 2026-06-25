@@ -1,0 +1,164 @@
+/* ============================================================
+   ArtiMindArt — Design System v3
+   Editorial · Black & White · Sharp · Premium
+   ============================================================ */
+
+:root {
+  /* --- Monochrome palette (NO color) --- */
+  --bg: #ffffff;
+  --bg-soft: #f4f4f2;     /* barely-there warm grey */
+  --ink: #0a0a0a;         /* near-black */
+  --ink-2: #1c1c1c;
+  --muted: #707070;       /* secondary grey text */
+  --line: #e4e3e0;        /* hairline */
+  --line-2: #c9c8c4;
+  --line-ink: #0a0a0a;
+
+  /* --- Typography --- */
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+  /* --- Layout --- */
+  --maxw: 1200px;
+  --maxw-wide: 1360px;
+  --pad: clamp(1.25rem, 4vw, 4rem);
+
+  /* NO border radius — everything is sharp/editorial */
+  --radius: 0px;
+
+  /* --- Motion --- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: clamp(0.98rem, 0.94rem + 0.22vw, 1.08rem);
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* --- Headings: elegant serif, light, generous --- */
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+  line-height: 1.06;
+}
+
+.h-xl { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.9rem, 1.5rem + 5.4vw, 6.8rem); line-height: 0.98; letter-spacing: -0.02em; }
+.h-lg { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 1.4rem + 3vw, 4rem); line-height: 1.02; }
+.h-md { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem); }
+.italic { font-style: italic; }
+
+/* --- Layout helpers --- */
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+.wrap--wide { max-width: var(--maxw-wide); }
+.section { padding-block: clamp(4.5rem, 9vw, 9rem); }
+.center { text-align: center; }
+
+/* --- Eyebrow: uppercase, letter-spaced, with a rule --- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  font-family: var(--font);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--ink);
+}
+
+/* --- Buttons: rectangular, uppercase, letterspaced --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1.15em 2em;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.btn--dark { background: var(--ink); color: #fff; }
+.btn--dark:hover { background: #fff; color: var(--ink); }
+.btn--light { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn--light:hover { background: var(--ink); color: #fff; }
+.btn--ghost { border-color: transparent; padding-inline: 0; background: transparent; }
+.btn--ghost:hover { color: var(--muted); }
+.btn--on-dark { border-color: rgba(255,255,255,.6); color: #fff; }
+.btn--on-dark:hover { background: #fff; color: var(--ink); border-color: #fff; }
+.btn--wa { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn--wa:hover { background: #fff; color: var(--ink); }
+.btn .arrow { transition: transform 0.4s var(--ease); font-family: var(--font); }
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* --- Link with arrow --- */
+.tlink {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  border-bottom: 1px solid var(--ink); padding-bottom: 3px;
+}
+.tlink .arrow { transition: transform 0.4s var(--ease); }
+.tlink:hover .arrow { transform: translateX(4px); }
+
+/* --- Tag / chip --- */
+.tag {
+  display: inline-flex; align-items: center;
+  padding: 0.45em 0.9em;
+  border: 1px solid var(--line-2);
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* --- Hairline divider --- */
+.rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+/* --- Reveal on scroll --- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  will-change: opacity, transform;
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
