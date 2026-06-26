@@ -6,10 +6,10 @@
 
 export const LEGAL = {
   // Titular (autónomo)
-  owner: "Javier Pato Prieto",          // TODO: confirma tu nombre completo legal
-  nif: "[TU NIF/DNI]",                   // TODO: tu DNI/NIF
-  address: "[Tu domicilio fiscal completo]", // TODO: calle, nº, CP, ciudad
-  city: "[Ciudad]",                      // TODO: ciudad (para la jurisdicción)
+  owner: "Javier Pato Prieto",
+  nif: "71449969D",
+  address: "Calle Los Remedios 64F, 39527 Liandres, Cantabria",
+  city: "Liandres (Cantabria)",
   country: "España",
   activity:
     "estudio creativo de IA: servicios de diseño y producción de imagen y vídeo",
