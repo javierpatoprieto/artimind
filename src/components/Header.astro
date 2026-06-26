@@ -1,6 +1,6 @@
 ---
 import { useTranslations, routes, type Lang, type PageKey, CONTACT } from "../i18n/ui";
-interface Props { lang: Lang; page: PageKey; altHref: string; dark?: boolean }
+interface Props { lang: Lang; page: PageKey | "legal"; altHref: string; dark?: boolean }
 const { lang, page, altHref, dark = false } = Astro.props;
 const t = useTranslations(lang);
 const r = routes[lang];

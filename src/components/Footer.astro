@@ -1,9 +1,10 @@
 ---
-import { useTranslations, routes, type Lang, CONTACT } from "../i18n/ui";
+import { useTranslations, routes, legalRoutes, type Lang, CONTACT } from "../i18n/ui";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const r = routes[lang];
+const lr = legalRoutes[lang];
 const altLang = lang === "es" ? "en" : "es";
 ---
 
@@ -39,9 +40,21 @@ const altLang = lang === "es" ? "en" : "es";
 
   <div class="wrap wrap--wide ftr__bottom">
     <span>© {new Date().getFullYear()} ArtiMindArt — {t("footer.rights")}</span>
+    <nav class="ftr__legal">
+      <a href={lr.legal}>{t("footer.legal")}</a>
+      <a href={lr.privacy}>{t("footer.privacy")}</a>
+      <a href={lr.cookies}>{t("footer.cookies")}</a>
+      <button type="button" id="ftr-cookie-settings">{t("cookie.settings")}</button>
+    </nav>
     <span class="ftr__partner">Magnific Partner</span>
   </div>
 </footer>
+
+<script is:inline>
+  document.getElementById("ftr-cookie-settings")?.addEventListener("click", function () {
+    if (window.openCookieSettings) window.openCookieSettings();
+  });
+</script>
 
 <style>
   .ftr { background: var(--ink); color: #fff; padding: clamp(3.5rem, 6vw, 5.5rem) 0 2rem; }
@@ -56,5 +69,8 @@ const altLang = lang === "es" ? "en" : "es";
   .ftr__col a:hover { color: #fff; }
   .ftr__cta-h { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0 1.2rem; }
   .ftr__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,.5); }
+  .ftr__legal { display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; }
+  .ftr__legal a, .ftr__legal button { color: rgba(255,255,255,.5); font: inherit; letter-spacing: inherit; text-transform: inherit; background: none; border: 0; padding: 0; cursor: pointer; transition: color 0.25s; }
+  .ftr__legal a:hover, .ftr__legal button:hover { color: #fff; }
   @media (max-width: 820px) { .ftr__grid { grid-template-columns: 1fr 1fr; } }
 </style>

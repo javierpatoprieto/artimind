@@ -1,0 +1,75 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LEGAL } from "../../data/legal";
+import { legalRoutes } from "../../i18n/ui";
+const lang = "es" as const;
+const lr = legalRoutes;
+---
+<Layout lang={lang} page="legal" altHref={lr.en.privacy} title="Política de Privacidad — ArtiMindArt" description="Política de privacidad y tratamiento de datos personales de ArtiMindArt.">
+  <section class="legal">
+    <div class="wrap">
+      <div class="legal__head">
+        <h1 class="h-xl">Política de Privacidad</h1>
+        <p class="legal__updated">Última actualización: {LEGAL.updated.es}</p>
+      </div>
+      <div class="legal__body">
+        <h2>1. Responsable del tratamiento</h2>
+        <p>El responsable del tratamiento de tus datos personales es {LEGAL.owner}, con NIF {LEGAL.nif} y domicilio en {LEGAL.address}, {LEGAL.country}. Puedes contactar para cualquier cuestión relativa a tus datos en <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>.</p>
+        <p>Esta política se ha elaborado conforme al Reglamento (UE) 2016/679, General de Protección de Datos (RGPD), y a la Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD).</p>
+
+        <h2>2. Qué datos tratamos y cómo los recogemos</h2>
+        <p>Tratamos los datos que nos facilitas voluntariamente cuando contactas con nosotros, ya sea por correo electrónico, por WhatsApp o a través del asistente de chat de la web. En función del canal, estos datos pueden incluir:</p>
+        <ul>
+          <li>Datos identificativos y de contacto: nombre, dirección de correo electrónico y número de teléfono.</li>
+          <li>El contenido del mensaje o consulta que nos envías.</li>
+          <li>Datos de navegación obtenidos mediante herramientas de analítica, que solo se recogen si prestas tu consentimiento a través del banner de cookies.</li>
+        </ul>
+
+        <h2>3. Finalidades del tratamiento</h2>
+        <ul>
+          <li>Atender y responder a las consultas, solicitudes y mensajes que nos remites.</li>
+          <li>Prestar los servicios solicitados y elaborar presupuestos.</li>
+          <li>Medir y analizar el tráfico del sitio web para mejorar nuestros contenidos y servicios.</li>
+        </ul>
+
+        <h2>4. Bases legales</h2>
+        <ul>
+          <li>Tu consentimiento, que prestas al contactarnos y al aceptar las cookies de analítica (artículo 6.1.a del RGPD).</li>
+          <li>La aplicación de medidas precontractuales y la ejecución del contrato cuando solicitas un presupuesto o contratas un servicio (artículo 6.1.b).</li>
+          <li>Nuestro interés legítimo en gestionar las comunicaciones y mantener la seguridad del sitio (artículo 6.1.f).</li>
+        </ul>
+
+        <h2>5. Destinatarios y encargados del tratamiento</h2>
+        <p>Para prestar nuestros servicios recurrimos a proveedores que pueden acceder a datos personales como encargados del tratamiento:</p>
+        <ul>
+          <li>Vercel Inc. (Estados Unidos): proveedor de alojamiento del sitio web.</li>
+          <li>Google: servicio de analítica (Google Analytics 4), que solo se activa si prestas tu consentimiento.</li>
+          <li>Meta Platforms (WhatsApp): únicamente si decides contactarnos a través de ese canal.</li>
+        </ul>
+        <p>No cedemos tus datos a otros terceros, salvo obligación legal.</p>
+
+        <h2>6. Transferencias internacionales</h2>
+        <p>Algunos de nuestros proveedores, como Vercel o Google, están ubicados o tratan datos en Estados Unidos. Estas transferencias internacionales se realizan con las garantías adecuadas previstas en el RGPD, principalmente mediante la firma de Cláusulas Contractuales Tipo aprobadas por la Comisión Europea.</p>
+
+        <h2>7. Plazo de conservación</h2>
+        <p>Conservaremos tus datos mientras se mantenga la consulta o la relación que motivó su recogida y, posteriormente, durante los plazos necesarios para cumplir con las obligaciones legales aplicables. Una vez transcurridos dichos plazos, los datos serán suprimidos.</p>
+
+        <h2>8. Tus derechos</h2>
+        <p>Puedes ejercer en cualquier momento los siguientes derechos:</p>
+        <ul>
+          <li>Acceso a tus datos personales.</li>
+          <li>Rectificación de los datos inexactos.</li>
+          <li>Supresión de tus datos.</li>
+          <li>Oposición al tratamiento.</li>
+          <li>Limitación del tratamiento.</li>
+          <li>Portabilidad de tus datos.</li>
+          <li>Retirada del consentimiento prestado, en cualquier momento, sin que ello afecte a la licitud del tratamiento previo.</li>
+        </ul>
+        <p>Para ejercerlos, escríbenos a <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a> indicando el derecho que deseas ejercer. Si consideras que el tratamiento de tus datos no se ajusta a la normativa, tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD), <a href="https://www.aepd.es" rel="noopener noreferrer" target="_blank">https://www.aepd.es</a>.</p>
+
+        <h2>9. Cookies</h2>
+        <p>Este sitio web utiliza cookies y tecnologías similares. Puedes consultar toda la información sobre su uso, finalidad y gestión en nuestra <a href={lr.es.cookies}>Política de Cookies</a>.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

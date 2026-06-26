@@ -1,0 +1,49 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LEGAL } from "../../data/legal";
+import { legalRoutes } from "../../i18n/ui";
+const lang = "es" as const;
+const lr = legalRoutes;
+---
+<Layout lang={lang} page="legal" altHref={lr.en.legal} title="Aviso legal — ArtiMindArt" description="Aviso legal y datos del titular de ArtiMindArt.">
+  <section class="legal">
+    <div class="wrap">
+      <div class="legal__head">
+        <h1 class="h-xl">Aviso legal</h1>
+        <p class="legal__updated">Última actualización: {LEGAL.updated.es}</p>
+      </div>
+      <div class="legal__body">
+        <h2>1. Titular del sitio</h2>
+        <p>Este sitio web es titularidad de {LEGAL.owner}, con NIF {LEGAL.nif} y domicilio en {LEGAL.address}, {LEGAL.country}. Actividad: {LEGAL.activity}. Contacto: <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>.</p>
+        <p>El presente aviso legal regula el acceso, la navegación y el uso de este sitio web, en cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE) y demás normativa aplicable.</p>
+
+        <h2>2. Objeto y condiciones de uso</h2>
+        <p>Este sitio web tiene como finalidad presentar y dar a conocer los servicios de estudio creativo de inteligencia artificial ofrecidos por el titular, así como facilitar el contacto con personas interesadas en ellos. El acceso al sitio es gratuito, salvo en lo relativo al coste de la conexión a través de la red de telecomunicaciones contratada por el usuario.</p>
+        <p>El acceso y la navegación por el sitio atribuyen la condición de usuario e implican la aceptación plena y sin reservas de todas las disposiciones incluidas en este aviso legal, que pueden ser modificadas en cualquier momento. El usuario se compromete a hacer un uso adecuado y lícito de los contenidos y servicios.</p>
+
+        <h2>3. Propiedad intelectual e industrial</h2>
+        <p>Todos los contenidos de este sitio web, incluidos a título enunciativo los textos, las imágenes generadas con inteligencia artificial, los diseños, los logotipos, las marcas, la estructura, el código fuente y cualquier otro elemento, son titularidad del titular del sitio o de terceros que han autorizado su uso, y están protegidos por la normativa de propiedad intelectual e industrial.</p>
+        <p>Queda expresamente prohibida la reproducción, distribución, comunicación pública, transformación o cualquier otra forma de reutilización, total o parcial, de los contenidos de este sitio sin la autorización previa y por escrito del titular.</p>
+
+        <h2>4. Obligaciones del usuario y uso aceptable</h2>
+        <p>El usuario se obliga a utilizar el sitio web de conformidad con la ley, este aviso legal, la moral y el orden público. En particular, se compromete a abstenerse de:</p>
+        <ul>
+          <li>Utilizar los contenidos con fines o efectos ilícitos, lesivos de derechos o intereses de terceros o que puedan dañar el sitio web.</li>
+          <li>Introducir o difundir virus, código malicioso o cualquier otro elemento susceptible de provocar daños en los sistemas.</li>
+          <li>Intentar acceder a áreas restringidas o a los sistemas de información del titular o de terceros sin autorización.</li>
+          <li>Reproducir, copiar o reutilizar los contenidos protegidos sin autorización conforme a la cláusula anterior.</li>
+        </ul>
+
+        <h2>5. Exención de responsabilidad y enlaces externos</h2>
+        <p>El titular no garantiza la inexistencia de errores en el acceso al sitio web ni en sus contenidos, ni que estos se encuentren actualizados en todo momento, si bien desplegará los esfuerzos razonables para evitar dichos errores y, en su caso, subsanarlos o actualizarlos. El titular no será responsable de los daños derivados de un uso indebido del sitio por parte del usuario.</p>
+        <p>Este sitio puede contener enlaces a sitios web de terceros. El titular no asume responsabilidad alguna sobre los contenidos, políticas o servicios de dichos sitios, cuyo acceso se realiza bajo la exclusiva responsabilidad del usuario.</p>
+
+        <h2>6. Protección de datos y cookies</h2>
+        <p>El tratamiento de los datos personales de los usuarios se rige por lo establecido en la <a href={lr.es.privacy}>Política de Privacidad</a>. El uso de cookies y tecnologías similares se detalla en la <a href={lr.es.cookies}>Política de Cookies</a>.</p>
+
+        <h2>7. Legislación aplicable y jurisdicción</h2>
+        <p>El presente aviso legal se rige por la legislación española. Para la resolución de cualquier controversia que pudiera derivarse del acceso o uso de este sitio web, las partes se someten a los juzgados y tribunales de {LEGAL.city}, salvo que la normativa aplicable establezca un fuero distinto de carácter imperativo.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

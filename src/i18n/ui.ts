@@ -109,6 +109,14 @@ export const ui = {
     "footer.social": "Social",
     "footer.cta": "¿Listo para crear?",
     "footer.rights": "Todos los derechos reservados.",
+    "footer.legal": "Aviso legal",
+    "footer.privacy": "Privacidad",
+    "footer.cookies": "Cookies",
+    "cookie.settings": "Configurar cookies",
+    "cookie.text": "Usamos cookies propias y de terceros para analizar el tráfico. Puedes aceptarlas todas, rechazarlas o leer más en la ",
+    "cookie.policy": "Política de Cookies",
+    "cookie.accept": "Aceptar",
+    "cookie.reject": "Rechazar",
 
     "svc.fashion.title": "Moda con modelos de IA",
     "svc.product.title": "Fotografía de producto",
@@ -217,6 +225,14 @@ export const ui = {
     "footer.social": "Social",
     "footer.cta": "Ready to create?",
     "footer.rights": "All rights reserved.",
+    "footer.legal": "Legal notice",
+    "footer.privacy": "Privacy",
+    "footer.cookies": "Cookies",
+    "cookie.settings": "Cookie settings",
+    "cookie.text": "We use our own and third-party cookies to analyze traffic. You can accept all, reject them, or read more in our ",
+    "cookie.policy": "Cookie Policy",
+    "cookie.accept": "Accept",
+    "cookie.reject": "Reject",
 
     "svc.fashion.title": "Fashion with AI models",
     "svc.product.title": "Product photography",
@@ -242,6 +258,19 @@ export const routes: Record<Lang, Record<PageKey, string>> = {
     blog: "/blog/",
     about: "/studio/",
     contact: "/contact/",
+  },
+};
+
+export const legalRoutes: Record<Lang, { legal: string; privacy: string; cookies: string }> = {
+  es: {
+    legal: "/es/aviso-legal/",
+    privacy: "/es/privacidad/",
+    cookies: "/es/cookies/",
+  },
+  en: {
+    legal: "/legal-notice/",
+    privacy: "/privacy/",
+    cookies: "/cookies/",
   },
 };
 

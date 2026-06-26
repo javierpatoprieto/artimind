@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { LEGAL } from "../data/legal";
+import { legalRoutes } from "../i18n/ui";
+const lang = "en" as const;
+const lr = legalRoutes;
+---
+<Layout lang={lang} page="legal" altHref={lr.es.cookies} title="Cookie Policy — ArtiMindArt" description="How ArtiMindArt uses cookies and similar technologies, and how to manage them.">
+  <section class="legal">
+    <div class="wrap">
+      <div class="legal__head">
+        <h1 class="h-xl">Cookie Policy</h1>
+        <p class="legal__updated">Last updated: {LEGAL.updated.en}</p>
+      </div>
+      <div class="legal__body">
+        <h2>1. What are cookies and similar technologies</h2>
+        <p>Cookies are small files that a website stores on your device. Similar technologies, such as browser local storage, work in a comparable way. They are used to make a site work, remember your preferences and, where you consent, to measure how the site is used. This policy explains which ones we use on ArtiMindArt and how you can control them.</p>
+
+        <h2>2. Consent and the cookie banner</h2>
+        <p>When you first visit the site, a consent banner appears. Non-essential cookies, such as analytics, are blocked until you accept them. We use Google Consent Mode v2, which means that analytics tools do not load or set their cookies until you give your consent. Strictly necessary technologies, including the one that remembers your cookie choice, do not require consent.</p>
+
+        <h2>3. Cookies and technologies we use</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Cookie / Tech</th>
+              <th>Provider</th>
+              <th>Purpose</th>
+              <th>Type</th>
+              <th>Retention</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>am-consent (localStorage)</td>
+              <td>ArtiMindArt</td>
+              <td>Stores your cookie consent choice so the banner is not shown again.</td>
+              <td>Technical / necessary</td>
+              <td>Until you clear it or change your choice</td>
+            </tr>
+            <tr>
+              <td>_ga</td>
+              <td>Google</td>
+              <td>Distinguishes users to measure site traffic. Loaded only after consent.</td>
+              <td>Analytics</td>
+              <td>About 2 years</td>
+            </tr>
+            <tr>
+              <td>_ga_*</td>
+              <td>Google</td>
+              <td>Maintains the analytics session state for Google Analytics 4. Loaded only after consent.</td>
+              <td>Analytics</td>
+              <td>About 2 years</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>4. How to accept, reject or change your choice</h2>
+        <p>You can accept or reject non-essential cookies directly in the consent banner. You can change your decision at any time using the "Cookie settings" link in the footer of the site, which reopens your preferences so you can grant or withdraw consent.</p>
+
+        <h2>5. Managing cookies in your browser</h2>
+        <p>You can also control or delete cookies through your browser settings. Most browsers let you block or remove cookies and clear local storage. Please note that disabling some technologies may affect how parts of the site work. Help pages for the most common browsers are available in their respective support sections.</p>
+
+        <h2>6. Third-party information</h2>
+        <p>Analytics on this site is provided by Google. You can read more about how Google handles data and cookies on its privacy and cookies pages at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a> and <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">https://policies.google.com/technologies/cookies</a>.</p>
+
+        <h2>7. More information</h2>
+        <p>For details on how we process the personal data collected through these technologies, including your rights, please read our <a href={lr.en.privacy}>Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

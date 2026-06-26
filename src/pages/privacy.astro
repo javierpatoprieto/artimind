@@ -1,0 +1,64 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { LEGAL } from "../data/legal";
+import { legalRoutes } from "../i18n/ui";
+const lang = "en" as const;
+const lr = legalRoutes;
+---
+<Layout lang={lang} page="legal" altHref={lr.es.privacy} title="Privacy Policy — ArtiMindArt" description="How ArtiMindArt collects, uses and protects your personal data.">
+  <section class="legal">
+    <div class="wrap">
+      <div class="legal__head">
+        <h1 class="h-xl">Privacy Policy</h1>
+        <p class="legal__updated">Last updated: {LEGAL.updated.en}</p>
+      </div>
+      <div class="legal__body">
+        <h2>1. Data controller</h2>
+        <p>The controller of your personal data is {LEGAL.owner}, NIF {LEGAL.nif}, with registered address at {LEGAL.address}, {LEGAL.country}. You can contact the controller at any time by email at <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>. This policy complies with the EU General Data Protection Regulation (GDPR) and applicable Spanish data protection law.</p>
+
+        <h2>2. What data we collect and how</h2>
+        <p>We only collect the data we need to respond to you and to run the studio:</p>
+        <ul>
+          <li><strong>Contact data</strong>: when you reach out by email, WhatsApp or the on-site chat assistant, we receive your name, your email address or phone number, and the content of your message.</li>
+          <li><strong>Browsing data</strong>: if you give your consent, we collect aggregated analytics about how the site is used (for example pages viewed and approximate location). This data is collected only after you accept analytics cookies.</li>
+        </ul>
+        <p>We do not knowingly collect special categories of data and we ask you not to send sensitive personal information through our contact channels.</p>
+
+        <h2>3. Purposes of processing</h2>
+        <ul>
+          <li>To reply to your enquiries and provide the information you request.</li>
+          <li>To prepare quotes and provide our creative services if you decide to work with us.</li>
+          <li>To measure and improve the traffic and performance of the website.</li>
+        </ul>
+
+        <h2>4. Legal bases</h2>
+        <ul>
+          <li><strong>Consent</strong> (Art. 6.1.a GDPR): for analytics cookies and for handling enquiries you voluntarily send us.</li>
+          <li><strong>Pre-contractual steps</strong> (Art. 6.1.b GDPR): to prepare quotes and respond to service requests.</li>
+          <li><strong>Legitimate interest</strong> (Art. 6.1.f GDPR): to keep the site secure and to understand, in aggregate, how it is used.</li>
+        </ul>
+
+        <h2>5. Recipients and processors</h2>
+        <p>We share data only with service providers who help us run the site and our communications:</p>
+        <ul>
+          <li><strong>Vercel Inc.</strong> (USA): hosting and content delivery of the website.</li>
+          <li><strong>Google</strong>: Google Analytics 4, loaded only if you accept analytics cookies.</li>
+          <li><strong>Meta Platforms / WhatsApp</strong>: only if you choose to contact us through WhatsApp.</li>
+        </ul>
+
+        <h2>6. International transfers</h2>
+        <p>Some of these providers, such as Vercel and Google, are located in the United States. Where data is transferred outside the European Economic Area, the transfer is protected by appropriate safeguards, in particular the European Commission's Standard Contractual Clauses (SCCs) and any additional measures required by law.</p>
+
+        <h2>7. Retention</h2>
+        <p>We keep contact data for as long as needed to handle your enquiry and, where applicable, to manage the resulting relationship. After that, data is kept only while required to comply with legal obligations, and is then deleted or anonymised. Analytics data is retained according to the configured analytics retention period.</p>
+
+        <h2>8. Your rights</h2>
+        <p>You have the right to request access, rectification, erasure, objection, restriction of processing and portability of your data, and to withdraw any consent you have given at any time without affecting prior processing. To exercise these rights, contact us by email at <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>, indicating which right you wish to exercise.</p>
+        <p>If you believe your data has not been handled correctly, you also have the right to lodge a complaint with the Spanish supervisory authority, the Agencia Española de Protección de Datos (AEPD), at <a href="https://www.aepd.es" target="_blank" rel="noopener">https://www.aepd.es</a>.</p>
+
+        <h2>9. Cookies</h2>
+        <p>This website uses cookies and similar technologies. For full details on the cookies we use and how to manage your choices, please read our <a href={lr.en.cookies}>Cookie Policy</a>.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

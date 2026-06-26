@@ -3,19 +3,21 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ChatWidget from "../components/ChatWidget.astro";
+import CookieConsent from "../components/CookieConsent.astro";
 import { routes, SITE, type Lang, type PageKey } from "../i18n/ui";
 
 interface Props {
   lang: Lang;
-  page: PageKey;
+  page: PageKey | "legal";
   title: string;
   description: string;
   ogImage?: string;
   jsonld?: Record<string, any>;
+  altHref?: string;
 }
-const { lang, page, title, description, ogImage = "/img/hero.webp", jsonld } = Astro.props;
+const { lang, page, title, description, ogImage = "/img/hero.webp", jsonld, altHref: altHrefProp } = Astro.props;
 const altLang: Lang = lang === "es" ? "en" : "es";
-const altHref = routes[altLang][page];
+const altHref = altHrefProp ?? routes[altLang][page as PageKey];
 const canonical = SITE + Astro.url.pathname;
 const ogImageUrl = SITE + ogImage;
 
@@ -63,6 +65,7 @@ const orgLd = {
     />
   </head>
   <body>
+    <CookieConsent lang={lang} />
     <Header lang={lang} page={page} altHref={altHref} dark={page === "home"} />
     <main>
       <slot />

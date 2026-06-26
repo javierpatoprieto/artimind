@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { LEGAL } from "../data/legal";
+import { legalRoutes } from "../i18n/ui";
+const lang = "en" as const;
+const lr = legalRoutes;
+---
+<Layout lang={lang} page="legal" altHref={lr.es.legal} title="Legal notice — ArtiMindArt" description="Legal notice and ownership details for ArtiMindArt.">
+  <section class="legal">
+    <div class="wrap">
+      <div class="legal__head">
+        <h1 class="h-xl">Legal notice</h1>
+        <p class="legal__updated">Last updated: {LEGAL.updated.en}</p>
+      </div>
+      <div class="legal__body">
+        <h2>1. Site owner</h2>
+        <p>This website is owned and operated by {LEGAL.owner}, NIF {LEGAL.nif}, with registered address at {LEGAL.address}, {LEGAL.country}. Activity: {LEGAL.activity}. Contact: <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>.</p>
+        <p>This legal notice governs the access to and use of this website. By browsing the site you accept the terms set out below. The owner operates as a self-employed sole trader (autónomo) registered in Spain, in compliance with Spanish Law 34/2002 on Information Society Services and Electronic Commerce (LSSI-CE).</p>
+
+        <h2>2. Purpose of the site</h2>
+        <p>This website presents the services of ArtiMindArt, an AI-assisted creative studio. Its purpose is to showcase the studio's work, describe its services, and allow visitors to get in touch to request information or quotes. The site does not sell products directly through an online checkout; any engagement is agreed separately between the parties.</p>
+
+        <h2>3. Intellectual property</h2>
+        <p>All content on this website, including text, layout, graphics, logos and AI-generated imagery, belongs to {LEGAL.owner} or is used under the appropriate rights, unless otherwise stated. No part of the site may be reproduced, distributed, modified or reused, in whole or in part, without the prior written permission of the owner.</p>
+        <p>The studio's name, brand and visual identity are protected. Any unauthorised use of the site's content may constitute an infringement of intellectual property rights and applicable law.</p>
+
+        <h2>4. User obligations and acceptable use</h2>
+        <p>By using this website you agree to:</p>
+        <ul>
+          <li>Use the site lawfully and in good faith.</li>
+          <li>Not attempt to damage, disable, overload or impair the site or its underlying systems.</li>
+          <li>Not introduce malware, harmful code or carry out any action that may compromise the security of the site or its visitors.</li>
+          <li>Not use the contact channels to send unlawful, abusive, misleading or unsolicited commercial content.</li>
+          <li>Respect the intellectual property rights described above.</li>
+        </ul>
+
+        <h2>5. Limitation of liability and external links</h2>
+        <p>The owner takes reasonable care to keep the information on this site accurate and up to date, but does not guarantee that it is free from errors or that the site will always be available without interruption. The owner is not liable for any damage arising from the use of, or inability to use, the website, to the extent permitted by law.</p>
+        <p>This website may contain links to third-party sites. These links are provided for convenience only. The owner does not control and is not responsible for the content, policies or practices of external websites.</p>
+
+        <h2>6. Data protection and cookies</h2>
+        <p>The processing of personal data through this website is described in our <a href={lr.en.privacy}>Privacy Policy</a>. Information about the cookies and similar technologies used on the site is available in our <a href={lr.en.cookies}>Cookie Policy</a>.</p>
+
+        <h2>7. Applicable law and jurisdiction</h2>
+        <p>This legal notice and any use of the website are governed by Spanish law. Any dispute arising in connection with the website shall be submitted to the courts of {LEGAL.city}, without prejudice to any mandatory consumer protection rules that may apply.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

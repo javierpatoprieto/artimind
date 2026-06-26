@@ -1,0 +1,90 @@
+---
+import { useTranslations, legalRoutes, type Lang } from "../i18n/ui";
+import { GA_ID } from "../data/legal";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const cookiesHref = legalRoutes[lang].cookies;
+---
+
+{/* Google Consent Mode v2 — denegado por defecto hasta consentimiento */}
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "denied",
+    functionality_storage: "granted",
+    security_storage: "granted",
+    wait_for_update: 500,
+  });
+  try {
+    if (localStorage.getItem("am-consent") === "granted") {
+      gtag("consent", "update", { analytics_storage: "granted" });
+    }
+  } catch (e) {}
+</script>
+
+{GA_ID && (
+  <Fragment>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <script is:inline set:html={`gtag('js', new Date()); gtag('config', '${GA_ID}', { anonymize_ip: true });`}></script>
+  </Fragment>
+)}
+
+<div class="cc" id="cookie-banner" hidden role="dialog" aria-live="polite" aria-label="cookies">
+  <p class="cc__text">
+    {t("cookie.text")}<a href={cookiesHref}>{t("cookie.policy")}</a>.
+  </p>
+  <div class="cc__actions">
+    <button class="cc__btn cc__btn--ghost" id="cc-reject">{t("cookie.reject")}</button>
+    <button class="cc__btn cc__btn--solid" id="cc-accept">{t("cookie.accept")}</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = "am-consent";
+    var banner = document.getElementById("cookie-banner");
+    function update(v) {
+      if (window.gtag) gtag("consent", "update", { analytics_storage: v });
+    }
+    function choose(v) {
+      try { localStorage.setItem(KEY, v); } catch (e) {}
+      update(v === "granted" ? "granted" : "denied");
+      if (banner) banner.hidden = true;
+    }
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    if (!stored && banner) banner.hidden = false;
+    var a = document.getElementById("cc-accept");
+    var r = document.getElementById("cc-reject");
+    if (a) a.addEventListener("click", function () { choose("granted"); });
+    if (r) r.addEventListener("click", function () { choose("denied"); });
+    window.openCookieSettings = function () { if (banner) banner.hidden = false; };
+  })();
+</script>
+
+<style>
+  .cc {
+    position: fixed; z-index: 300; left: 50%; bottom: clamp(1rem, 3vw, 2rem);
+    transform: translateX(-50%);
+    width: min(680px, calc(100% - 2rem));
+    background: var(--ink); color: #fff;
+    border-radius: 14px; padding: 1.2rem 1.3rem;
+    display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+    box-shadow: 0 12px 40px rgba(0,0,0,.28);
+  }
+  .cc[hidden] { display: none; }
+  .cc__text { margin: 0; font-size: 0.86rem; line-height: 1.5; color: rgba(255,255,255,.8); flex: 1 1 260px; }
+  .cc__text a { color: #fff; border-bottom: 1px solid rgba(255,255,255,.4); }
+  .cc__actions { display: flex; gap: 0.6rem; flex: none; }
+  .cc__btn { font-family: var(--font); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em; padding: 0.6rem 1.1rem; border-radius: 999px; cursor: pointer; border: 1px solid rgba(255,255,255,.3); transition: background 0.25s, color 0.25s; }
+  .cc__btn--ghost { background: transparent; color: #fff; }
+  .cc__btn--ghost:hover { background: rgba(255,255,255,.1); }
+  .cc__btn--solid { background: #fff; color: var(--ink); border-color: #fff; }
+  .cc__btn--solid:hover { background: rgba(255,255,255,.85); }
+  @media (max-width: 540px) { .cc { flex-direction: column; align-items: stretch; } .cc__actions { justify-content: flex-end; } }
+</style>
