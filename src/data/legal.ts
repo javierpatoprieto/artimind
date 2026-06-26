@@ -20,4 +20,4 @@ export const LEGAL = {
 
 // Pega aquí tu ID de Google Analytics 4 para ACTIVAR la analítica.
 // Ej.: "G-XXXXXXXXXX". Vacío = Analytics desactivado (el banner sigue funcionando).
-export const GA_ID = "";
+export const GA_ID = "G-CRGWC2RZ64";
