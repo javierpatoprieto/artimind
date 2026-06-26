@@ -48,6 +48,10 @@ const orgLd = {
     <link rel="alternate" hreflang={altLang} href={SITE + altHref} />
     <link rel="alternate" hreflang={lang} href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#0a0a0a" />
     <Fragment set:html={`<script type="application/ld+json">${JSON.stringify(orgLd)}</script>`} />
     {jsonld && <Fragment set:html={`<script type="application/ld+json">${JSON.stringify(jsonld)}</script>`} />}
 
