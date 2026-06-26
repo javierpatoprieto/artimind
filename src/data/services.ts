@@ -44,7 +44,7 @@ export const services: Record<Lang, Service[]> = {
         "Adaptaciones para banner, ficha y redes",
         "Acabado de impresión con Magnific",
       ],
-      images: ["/img/perfume.webp", "/img/cosmetic.webp", "/img/perfume-2.webp", "/img/cosmetic-2.webp"],
+      images: ["/img/seiko-1.webp", "/img/seiko-2.webp", "/img/perfume.webp", "/img/cosmetic.webp", "/img/perfume-2.webp", "/img/cosmetic-2.webp"],
       metaTitle: "Fotografía de producto con IA — ArtiMindArt",
       metaDesc:
         "Bodegones y packshots de producto con calidad de estudio de lujo. Cosmética, perfume, tech y más. Listo para ecommerce y campaña.",
@@ -100,7 +100,7 @@ export const services: Record<Lang, Service[]> = {
         "Adaptations for banner, product page and social",
         "Print-grade finishing with Magnific",
       ],
-      images: ["/img/perfume.webp", "/img/cosmetic.webp", "/img/perfume-2.webp", "/img/cosmetic-2.webp"],
+      images: ["/img/seiko-1.webp", "/img/seiko-2.webp", "/img/perfume.webp", "/img/cosmetic.webp", "/img/perfume-2.webp", "/img/cosmetic-2.webp"],
       metaTitle: "AI product photography — ArtiMindArt",
       metaDesc:
         "Product still life and packshots with luxury studio quality. Cosmetics, perfume, tech and more. Ready for ecommerce and campaign.",
