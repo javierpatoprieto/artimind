@@ -5,12 +5,12 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const r = routes[lang];
 // Imágenes del carrusel (el vídeo es la primera diapositiva)
-const slides = ["/img/portrait.webp", "/img/sunglasses.webp", "/img/sneakers.webp", "/img/perfume.webp"];
+const slides = ["/img/slider-1.webp", "/img/slider-2.webp", "/img/slider-3.webp"];
 const total = slides.length + 1;
 ---
 
 <section class="hero" id="top">
-  <div class="hero__bg" aria-hidden="true">
+  <div class="hero__bg">
     <div class="hero__slides">
       <div class="hero__slide is-active" data-slide>
         <video autoplay muted loop playsinline poster="/img/rooftop.webp" preload="metadata">
@@ -18,7 +18,10 @@ const total = slides.length + 1;
         </video>
       </div>
       {slides.map((src) => (
-        <div class="hero__slide" data-slide><img src={src} alt="" loading="eager" decoding="async" /></div>
+        <div class="hero__slide" data-slide>
+          <img class="hero__media hero__media--gray" src={src} alt="" loading="eager" decoding="async" />
+          <img class="hero__media hero__media--color" src={src} alt="" aria-hidden="true" loading="eager" decoding="async" />
+        </div>
       ))}
     </div>
     <div class="hero__scrim"></div>
@@ -41,6 +44,14 @@ const total = slides.length + 1;
     ))}
   </div>
 
+  <svg class="hero__filter" aria-hidden="true" focusable="false">
+    <filter id="liquid">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.013" numOctaves="2" seed="7" result="n">
+        <animate attributeName="baseFrequency" dur="16s" values="0.012 0.013;0.02 0.017;0.012 0.013" repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="26" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
 </section>
 <span id="after-hero"></span>
 
@@ -55,17 +66,28 @@ const total = slides.length + 1;
   .hero__slides { position: absolute; inset: 0; }
   .hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s var(--ease); }
   .hero__slide.is-active { opacity: 1; }
-  .hero__slide video, .hero__slide img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); display: block; }
-  .hero__slide.is-active video, .hero__slide.is-active img { animation: heroZoom 7s var(--ease) forwards; }
+  .hero__slide video, .hero__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero__slide video, .hero__media--gray { filter: grayscale(1) contrast(1.05); }
+  .hero__slide.is-active video, .hero__slide.is-active .hero__media { animation: heroZoom 7s var(--ease) forwards; }
   @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.07); } }
+
+  /* Gota de agua en color que sigue al cursor */
+  .hero__media--color {
+    opacity: 0;
+    -webkit-mask-image: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), #000 0 36%, transparent 64%);
+    mask-image: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), #000 0 36%, transparent 64%);
+    transition: opacity 0.4s var(--ease);
+  }
+  .hero__bg:hover .hero__slide.is-active .hero__media--color { opacity: 1; filter: url(#liquid); }
+  .hero__filter { position: absolute; width: 0; height: 0; }
+
   .hero__scrim {
-    position: absolute; inset: 0;
+    position: absolute; inset: 0; pointer-events: none;
     background: linear-gradient(180deg, rgba(10,10,10,.45) 0%, rgba(10,10,10,.1) 40%, rgba(10,10,10,.78) 100%);
   }
-  .hero__inner { position: relative; z-index: 2; width: 100%; max-width: 60rem; }
-  .hero__eyebrow { color: #fff; }
-  .hero__eyebrow::before { background: #fff; }
-  .hero__title { margin-top: 1.6rem; max-width: 18ch; }
+  .hero__inner { position: relative; z-index: 2; width: 100%; max-width: 60rem; pointer-events: none; }
+  .hero__inner a { pointer-events: auto; }
+  .hero__title { max-width: 18ch; }
   .hero__sub {
     max-width: 50ch; margin-top: 1.6rem;
     font-size: clamp(1.05rem, 1rem + 0.45vw, 1.3rem); line-height: 1.55;
@@ -76,21 +98,29 @@ const total = slides.length + 1;
   .hero__dot { width: 30px; height: 3px; padding: 0; border: 0; cursor: pointer; background: rgba(255,255,255,.35); transition: background 0.3s var(--ease); }
   .hero__dot:hover { background: rgba(255,255,255,.65); }
   .hero__dot.is-active { background: #fff; }
-  .hero__index {
-    position: absolute; bottom: 2.9rem; right: var(--pad); z-index: 2;
-    font-size: 0.68rem; letter-spacing: 0.2em; color: rgba(255,255,255,.55);
-  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero__bg video { display: none; }
     .hero__slide { transition: none; }
-    .hero__slide.is-active video, .hero__slide.is-active img { animation: none; }
+    .hero__slide.is-active video, .hero__slide.is-active .hero__media { animation: none; }
+    .hero__media--color { display: none; }
   }
-  @media (max-width: 640px) { .hero__index { display: none; } .hero__dots { bottom: 1.2rem; } }
+  @media (max-width: 640px) { .hero__dots { bottom: 1.2rem; } }
 </style>
 
 <script>
+  const bg = document.querySelector<HTMLElement>(".hero__bg");
   const slides = Array.from(document.querySelectorAll<HTMLElement>(".hero__slide"));
   const dots = Array.from(document.querySelectorAll<HTMLElement>(".hero__dot"));
+
+  if (bg) {
+    bg.addEventListener("pointermove", (e) => {
+      const rect = bg.getBoundingClientRect();
+      bg.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+      bg.style.setProperty("--my", `${e.clientY - rect.top}px`);
+    });
+  }
+
   if (slides.length > 1) {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let i = 0;
@@ -105,7 +135,7 @@ const total = slides.length + 1;
     const start = () => { if (!reduce) timer = setInterval(() => go(i + 1), 5500); };
     const reset = () => { if (timer) clearInterval(timer); start(); };
     dots.forEach((d, idx) => d.addEventListener("click", () => { go(idx); reset(); }));
-    if (reduce) go(1); // sin movimiento: muestra una imagen fija (no el vídeo oculto)
+    if (reduce) go(1);
     start();
   }
 </script>
