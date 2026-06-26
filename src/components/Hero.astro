@@ -74,8 +74,8 @@ const total = slides.length + 1;
   /* Gota de agua en color que sigue al cursor */
   .hero__media--color {
     opacity: 0;
-    -webkit-mask-image: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), #000 0 36%, transparent 64%);
-    mask-image: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%), #000 0 36%, transparent 64%);
+    -webkit-mask-image: radial-gradient(circle clamp(260px, 30vw, 480px) at var(--mx, 50%) var(--my, 50%), #000 0 45%, transparent 72%);
+    mask-image: radial-gradient(circle clamp(260px, 30vw, 480px) at var(--mx, 50%) var(--my, 50%), #000 0 45%, transparent 72%);
     transition: opacity 0.4s var(--ease);
   }
   .hero__bg:hover .hero__slide.is-active .hero__media--color { opacity: 1; filter: url(#liquid); }
