@@ -31,7 +31,7 @@ if (limit) items = items.slice(0, limit);
           </div>
           <h3 class="wg__name">{p.data.title}</h3>
           <p class="wg__excerpt">{p.data.excerpt}</p>
-          <span class="wg__view">{t("work.view")} <span class="arrow">→</span></span>
+          <span class="btn btn--light wg__view">{t("work.view")} <span class="arrow">→</span></span>
         </div>
       </a>
     ))}
@@ -58,8 +58,7 @@ if (limit) items = items.slice(0, limit);
   .wg__row { display: flex; justify-content: space-between; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
   .wg__name { font-size: clamp(1.3rem,1.6vw,1.7rem); margin-bottom: 0.5rem; }
   .wg__excerpt { color: var(--muted); font-size: 0.92rem; margin: 0; }
-  .wg__view { margin-top: 1.1rem; display: inline-flex; align-items: center; gap: 0.5em; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px; padding: 0.55rem 1.15rem; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
-  .wg__view .arrow { transition: transform 0.4s var(--ease); }
+  .wg__view { margin-top: 1.2rem; }
   .wg__card:hover .wg__view { background: var(--ink); color: #fff; }
   .wg__card:hover .wg__view .arrow { transform: translateX(4px); }
   .wg__cta { display: flex; justify-content: center; margin-top: clamp(2.5rem,5vw,3.5rem); }
