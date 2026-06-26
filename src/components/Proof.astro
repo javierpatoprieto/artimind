@@ -21,8 +21,8 @@ const brands = ["ATELIER", "NORDA", "LUMA", "VESTRA", "AURÉ", "MODE&CO", "STUDI
 <style>
   .proof { background: var(--ink); color: #fff; padding-block: clamp(3rem, 6vw, 5rem); }
   .proof__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.8rem 2rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
-  .proof__eyebrow { color: #fff; }
-  .proof__eyebrow::before { background: #fff; }
+  .proof__eyebrow { color: #fff; font-size: 0.92rem; font-weight: 600; letter-spacing: 0.16em; }
+  .proof__eyebrow::before { background: #fff; width: 42px; height: 2px; }
   .proof__claim { font-family: var(--font-display); font-size: clamp(1.4rem, 1rem + 1.8vw, 2.4rem); color: #fff; margin: 0; max-width: 24ch; }
   .proof__strip { overflow: hidden; border-top: 1px solid rgba(255,255,255,.16); border-bottom: 1px solid rgba(255,255,255,.16); padding-block: clamp(1.6rem, 3vw, 2.4rem); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
   .proof__track { display: flex; gap: clamp(2.5rem, 6vw, 5rem); width: max-content; animation: proofScroll 30s linear infinite; }
