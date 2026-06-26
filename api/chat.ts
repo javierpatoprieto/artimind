@@ -4,6 +4,36 @@ import Anthropic from "@anthropic-ai/sdk";
 // público con tráfico anónimo. Si quieres más potencia, cambia a "claude-opus-4-8".
 const MODEL = "claude-haiku-4-5";
 
+// --- Anti-abuso ---
+const ALLOWED_HOSTS = ["artimind.art", "www.artimind.art"];
+const RL_MAX = 10; // peticiones permitidas por ventana e IP
+const RL_WINDOW_MS = 60_000; // ventana de 1 minuto
+const hits: Map<string, { n: number; t: number }> = new Map();
+
+function clientIp(req: any): string {
+  const xff = String(req.headers["x-forwarded-for"] || "");
+  return (xff.split(",")[0] || req.headers["x-real-ip"] || "unknown").trim();
+}
+function rateLimited(ip: string): boolean {
+  const now = Date.now();
+  const rec = hits.get(ip);
+  if (!rec || now - rec.t > RL_WINDOW_MS) {
+    hits.set(ip, { n: 1, t: now });
+    return false;
+  }
+  rec.n++;
+  return rec.n > RL_MAX;
+}
+function okOrigin(req: any): boolean {
+  const src = String(req.headers.origin || req.headers.referer || "");
+  if (!src) return true; // sin Origin/Referer no bloqueamos (usuarios con privacidad)
+  try {
+    return ALLOWED_HOSTS.includes(new URL(src).hostname);
+  } catch {
+    return false;
+  }
+}
+
 function systemPrompt(lang: "es" | "en"): string {
   if (lang === "en") {
     return `You are the virtual assistant for ArtiMindArt, the AI creative studio run by Javier Pato. ArtiMindArt makes fashion and product images and videos with AI, at major-production quality, in days and at a fraction of the cost of a traditional shoot. Official Magnific partner. Public figures you may cite: up to 70% less production time, 5x faster from concept to campaign, up to 90% savings vs traditional production.
@@ -32,6 +62,14 @@ export default async function handler(req: any, res: any) {
     res.status(405).json({ error: "method_not_allowed" });
     return;
   }
+  if (!okOrigin(req)) {
+    res.status(403).json({ error: "forbidden" });
+    return;
+  }
+  if (rateLimited(clientIp(req))) {
+    res.status(429).json({ error: "rate_limited" });
+    return;
+  }
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: "missing_api_key" });
@@ -43,6 +81,10 @@ export default async function handler(req: any, res: any) {
     const lang: "es" | "en" = body.lang === "en" ? "en" : "es";
 
     const incoming = Array.isArray(body.messages) ? body.messages : [];
+    if (incoming.length > 50) {
+      res.status(400).json({ error: "too_long" });
+      return;
+    }
     const messages: Anthropic.MessageParam[] = incoming
       .filter(
         (m: any) =>
