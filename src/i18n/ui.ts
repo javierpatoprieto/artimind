@@ -260,4 +260,4 @@ export const CONTACT = {
   web: "https://javierpato.es",
 };
 
-export const SITE = "https://artimind.art";
+export const SITE = "https://www.artimind.art";

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://artimind.art/sitemap.xml
+Sitemap: https://www.artimind.art/sitemap.xml
