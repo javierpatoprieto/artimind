@@ -45,63 +45,88 @@ const t = useTranslations(lang);
   const wa = root.dataset.wa;
 
   const isEs = lang === "es";
-  const L = {
-    options: isEs
-      ? ["Moda 👗", "Producto 📦", "Spot de vídeo 🎬", "Presupuesto 💸"]
-      : ["Fashion 👗", "Product 📦", "Video spot 🎬", "Budget 💸"],
-    answers: {
-      0: isEs
-        ? "Moda es lo mío: editoriales, lookbooks y campañas con modelos y estilismo de IA. ¿Me cuentas la marca y la prenda/colección?"
-        : "Fashion is my thing: editorials, lookbooks and campaigns with AI models and styling. Tell me about the brand and the garment/collection?",
-      1: isEs
-        ? "Producto: bodegones y packshots de nivel estudio de lujo. ¿Qué producto es (cosmética, bebida, tech…)?"
-        : "Product: luxury studio-grade still life and packshots. What's the product (cosmetics, drink, tech…)?",
-      2: isEs
-        ? "Spots de vídeo con ritmo cinematográfico para redes y campañas. ¿Duración aprox. y dónde lo vas a usar?"
-        : "Cinematic video spots for social and campaigns. Roughly how long and where will you use it?",
-      3: isEs
-        ? "El precio depende del volumen y los usos. Para darte una cifra real, lo mejor es que sigamos por WhatsApp con un par de detalles. 👇"
-        : "Pricing depends on volume and usage. For a real number, let's continue on WhatsApp with a couple of details. 👇",
-    },
-    fallback: isEs
-      ? "¡Buenísimo! Para darte plazos y presupuesto exacto seguimos por WhatsApp, así Javier te responde directo. 👇"
-      : "Great! For exact timing and budget let's move to WhatsApp so Javier replies directly. 👇",
-  };
+  const starters = isEs
+    ? ["Moda 👗", "Producto 📦", "Spot de vídeo 🎬", "Presupuesto 💸"]
+    : ["Fashion 👗", "Product 📦", "Video spot 🎬", "Budget 💸"];
+  const errMsg = isEs
+    ? "Ahora mismo no puedo responder por aquí. Sigamos por WhatsApp y Javier te atiende directo. 👇"
+    : "I can't reply here right now. Let's continue on WhatsApp and Javier will help you directly. 👇";
 
+  const history = [];
   let opened = false;
-  function add(text, who = "bot") {
+  let busy = false;
+
+  function add(text, who) {
     const el = document.createElement("div");
     el.className = `cw__msg cw__msg--${who}`;
     el.textContent = text;
     log.appendChild(el);
     log.scrollTop = log.scrollHeight;
+    return el;
   }
-  function waLink(extra) {
+  function waLink() {
     const base = isEs ? "Hola ArtiMindArt, vengo de la web. " : "Hi ArtiMindArt, coming from the site. ";
-    return `https://wa.me/${wa}?text=${encodeURIComponent(base + (extra || ""))}`;
+    return `https://wa.me/${wa}?text=${encodeURIComponent(base)}`;
   }
   function addWaButton() {
     const a = document.createElement("a");
     a.className = "cw__wa";
-    a.href = waLink("");
+    a.href = waLink();
     a.target = "_blank";
     a.rel = "noopener";
     a.textContent = toWa + " »";
     log.appendChild(a);
     log.scrollTop = log.scrollHeight;
   }
+  function showTyping() {
+    const el = document.createElement("div");
+    el.className = "cw__msg cw__msg--bot cw__typing";
+    el.textContent = "…";
+    el.id = "cw-typing";
+    log.appendChild(el);
+    log.scrollTop = log.scrollHeight;
+  }
+  function hideTyping() { document.getElementById("cw-typing")?.remove(); }
+
+  async function send(text) {
+    if (busy || !text) return;
+    busy = true;
+    add(text, "user");
+    history.push({ role: "user", content: text });
+    quick.innerHTML = "";
+    input.value = "";
+    showTyping();
+    try {
+      const r = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lang, messages: history }),
+      });
+      const data = await r.json();
+      hideTyping();
+      let reply = (data && data.reply) ? String(data.reply) : "";
+      if (!reply) throw new Error("empty");
+      const toWhatsapp = /\[\[\s*WA\s*\]\]/i.test(reply);
+      reply = reply.replace(/\[\[\s*WA\s*\]\]/gi, "").trim();
+      if (reply) { add(reply, "bot"); history.push({ role: "assistant", content: reply }); }
+      if (toWhatsapp) addWaButton();
+    } catch (e) {
+      hideTyping();
+      add(errMsg, "bot");
+      addWaButton();
+    } finally {
+      busy = false;
+    }
+  }
+
   function renderQuick() {
     quick.innerHTML = "";
-    L.options.forEach((opt, i) => {
+    starters.forEach((opt) => {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "cw__chip";
       b.textContent = opt;
-      b.addEventListener("click", () => {
-        add(opt, "user");
-        quick.innerHTML = "";
-        setTimeout(() => { add(L.answers[i]); addWaButton(); }, 420);
-      });
+      b.addEventListener("click", () => send(opt));
       quick.appendChild(b);
     });
   }
@@ -110,7 +135,7 @@ const t = useTranslations(lang);
     fab.classList.add("is-open");
     if (!opened) {
       opened = true;
-      setTimeout(() => { add(greeting); renderQuick(); }, 250);
+      setTimeout(() => { add(greeting, "bot"); renderQuick(); }, 250);
     }
   }
   function closePanel() { panel.hidden = true; fab.classList.remove("is-open"); }
@@ -119,12 +144,7 @@ const t = useTranslations(lang);
   close.addEventListener("click", closePanel);
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const v = input.value.trim();
-    if (!v) return;
-    add(v, "user");
-    input.value = "";
-    quick.innerHTML = "";
-    setTimeout(() => { add(L.fallback); addWaButton(); }, 420);
+    send(input.value.trim());
   });
 
   // Allow "open chat" button in contact section
