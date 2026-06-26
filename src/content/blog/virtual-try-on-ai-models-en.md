@@ -4,7 +4,7 @@ title: "Virtual try-on: put your product on any model with AI"
 path: "virtual-try-on-ai-models"
 date: "2026-06-12"
 excerpt: "One product, infinite models, scenes and sizes — how AI try-on widens your audience and kills sample logistics."
-cover: "/img/sunglasses.jpg"
+cover: "/img/sunglasses.webp"
 tags: ["Fashion", "Try-on"]
 readingTime: 6
 ---

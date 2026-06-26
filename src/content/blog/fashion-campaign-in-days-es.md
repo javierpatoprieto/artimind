@@ -4,7 +4,7 @@ title: "Lanza una campaña de moda completa con IA en días"
 path: "fashion-campaign-in-days"
 date: "2026-06-20"
 excerpt: "Del moodboard a una campaña completa y coherente en editorial, vertical y ecommerce, sin un solo rodaje."
-cover: "/img/rooftop.jpg"
+cover: "/img/rooftop.webp"
 tags: ["Moda", "Campaña"]
 readingTime: 6
 ---

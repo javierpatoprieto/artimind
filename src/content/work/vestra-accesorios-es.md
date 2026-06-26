@@ -6,8 +6,8 @@ client: "Vestra"
 year: "2025"
 category: "Producto"
 excerpt: "Catálogo de accesorios sobre modelo y en bodegón, consistente y a escala para ecommerce."
-cover: "/img/bed.jpg"
-images: ["/img/bed.jpg", "/img/tennis.jpg", "/img/carwash.jpg", "/img/dawn.jpg"]
+cover: "/img/bed.webp"
+images: ["/img/bed.webp", "/img/tennis.webp", "/img/carwash.webp", "/img/dawn.webp"]
 order: 3
 ---
 

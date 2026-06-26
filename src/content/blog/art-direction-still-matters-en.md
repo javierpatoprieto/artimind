@@ -4,7 +4,7 @@ title: "AI didn't replace art direction — it made it priceless"
 path: "art-direction-still-matters"
 date: "2026-06-06"
 excerpt: "The tools got faster; taste got rarer. Why direction, not prompting, separates a campaign from noise."
-cover: "/img/portrait.jpg"
+cover: "/img/portrait.webp"
 tags: ["Design", "Art direction"]
 readingTime: 6
 ---

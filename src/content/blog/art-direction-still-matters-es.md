@@ -4,7 +4,7 @@ title: "La IA no sustituyó la dirección de arte: la hizo imprescindible"
 path: "art-direction-still-matters"
 date: "2026-06-06"
 excerpt: "Las herramientas se aceleraron; el criterio se volvió escaso. Por qué la dirección, no el prompt, separa una campaña del ruido."
-cover: "/img/portrait.jpg"
+cover: "/img/portrait.webp"
 tags: ["Diseño", "Dirección de arte"]
 readingTime: 6
 ---

@@ -5,7 +5,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const r = routes[lang];
-const covers = ["/img/rooftop.jpg", "/img/sunglasses.jpg", "/img/carwash.jpg"];
+const covers = ["/img/rooftop.webp", "/img/sunglasses.webp", "/img/carwash.webp"];
 const cards = serviceTeasers(lang).map((s, i) => ({ ...s, img: covers[i] }));
 ---
 

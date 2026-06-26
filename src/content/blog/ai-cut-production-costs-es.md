@@ -4,7 +4,7 @@ title: "Cómo la IA recorta hasta un 90% los costes de producción de moda"
 path: "ai-cut-production-costs"
 date: "2026-06-24"
 excerpt: "Dónde se va de verdad el dinero en un rodaje tradicional y cómo la IA elimina casi todo sin bajar el listón."
-cover: "/img/perfume.jpg"
+cover: "/img/perfume.webp"
 tags: ["IA", "Costes"]
 readingTime: 6
 ---

@@ -4,7 +4,7 @@ title: "Why Magnific upscaling gives AI images print-grade quality"
 path: "why-magnific-quality"
 date: "2026-05-06"
 excerpt: "The final step most people skip — and why it's the difference between 'looks AI' and 'ready to print'."
-cover: "/img/bag.jpg"
+cover: "/img/bag.webp"
 tags: ["Magnific", "Quality"]
 readingTime: 6
 ---

@@ -4,7 +4,7 @@ title: "Try-on virtual: tu producto sobre cualquier modelo con IA"
 path: "virtual-try-on-ai-models"
 date: "2026-06-12"
 excerpt: "Un producto, modelos, escenas y tallas infinitas: cómo el try-on con IA amplía tu público y elimina la logística de muestras."
-cover: "/img/sunglasses.jpg"
+cover: "/img/sunglasses.webp"
 tags: ["Moda", "Try-on"]
 readingTime: 6
 ---

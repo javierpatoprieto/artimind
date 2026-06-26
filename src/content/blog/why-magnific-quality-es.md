@@ -4,7 +4,7 @@ title: "Por qué el upscaling de Magnific da calidad de imprenta a la IA"
 path: "why-magnific-quality"
 date: "2026-05-06"
 excerpt: "El paso final que casi todos se saltan y por qué marca la diferencia entre 'parece IA' y 'listo para imprimir'."
-cover: "/img/bag.jpg"
+cover: "/img/bag.webp"
 tags: ["Magnific", "Calidad"]
 readingTime: 6
 ---

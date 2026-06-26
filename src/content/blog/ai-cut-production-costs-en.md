@@ -4,7 +4,7 @@ title: "How AI cuts fashion production costs by up to 90%"
 path: "ai-cut-production-costs"
 date: "2026-06-24"
 excerpt: "Where the money actually goes in a traditional shoot — and how AI removes most of it without lowering the bar."
-cover: "/img/perfume.jpg"
+cover: "/img/perfume.webp"
 tags: ["AI", "Cost"]
 readingTime: 6
 ---

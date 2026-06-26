@@ -4,7 +4,7 @@ title: "Catálogos ecommerce a escala: imágenes de producto con IA que venden"
 path: "ecommerce-catalog-at-scale"
 date: "2026-06-16"
 excerpt: "Fichas de producto consistentes y listas para convertir en todo tu catálogo, generadas en vez de enviadas a estudio."
-cover: "/img/sneakers.jpg"
+cover: "/img/sneakers.webp"
 tags: ["Ecommerce", "Producto"]
 readingTime: 6
 ---

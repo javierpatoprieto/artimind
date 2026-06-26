@@ -4,7 +4,7 @@ title: "IA vs rodaje: la comparativa real de coste y tiempo"
 path: "ai-vs-photoshoot"
 date: "2026-06-22"
 excerpt: "Estudio, equipo, modelos, viajes, retoque, repeticiones: línea a línea de lo que te ahorras al pasarte a la IA."
-cover: "/img/model-1.jpg"
+cover: "/img/model-1.webp"
 tags: ["IA", "Producción"]
 readingTime: 6
 ---

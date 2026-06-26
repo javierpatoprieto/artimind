@@ -4,7 +4,7 @@ title: "AI vs the photoshoot: the real cost and time breakdown"
 path: "ai-vs-photoshoot"
 date: "2026-06-22"
 excerpt: "Studio, crew, models, travel, retouching, reshoots — a line-by-line look at what you replace when you switch to AI."
-cover: "/img/model-1.jpg"
+cover: "/img/model-1.webp"
 tags: ["AI", "Production"]
 readingTime: 6
 ---

@@ -4,7 +4,7 @@ title: "Hire an AI creative studio, or build it in-house?"
 path: "ai-creative-studio-vs-in-house"
 date: "2026-05-22"
 excerpt: "The honest trade-offs between learning AI yourself and bringing in a specialist who already ships."
-cover: "/img/doorway.jpg"
+cover: "/img/doorway.webp"
 tags: ["Studio", "Strategy"]
 readingTime: 6
 ---

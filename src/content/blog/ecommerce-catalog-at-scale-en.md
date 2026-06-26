@@ -4,7 +4,7 @@ title: "Ecommerce catalogs at scale: AI product imagery that sells"
 path: "ecommerce-catalog-at-scale"
 date: "2026-06-16"
 excerpt: "Consistent, conversion-ready product shots across your entire catalog — generated, not shipped to a studio."
-cover: "/img/sneakers.jpg"
+cover: "/img/sneakers.webp"
 tags: ["Ecommerce", "Product"]
 readingTime: 6
 ---

@@ -26,7 +26,7 @@ export const services: Record<Lang, Service[]> = {
         "Variaciones de fondo, pose y encuadre",
         "Acabado de impresión con Magnific",
       ],
-      images: ["/img/model-1.jpg", "/img/portrait.jpg", "/img/portrait-2.jpg", "/img/hero.jpg"],
+      images: ["/img/model-1.webp", "/img/portrait.webp", "/img/portrait-2.webp", "/img/hero.webp"],
       metaTitle: "Moda con modelos de IA — ArtiMindArt",
       metaDesc:
         "Editoriales, lookbooks y campañas de moda con modelos y estilismo de IA. Sin castings ni localizaciones. Calidad de estudio en días.",
@@ -44,7 +44,7 @@ export const services: Record<Lang, Service[]> = {
         "Adaptaciones para banner, ficha y redes",
         "Acabado de impresión con Magnific",
       ],
-      images: ["/img/perfume.jpg", "/img/cosmetic.jpg", "/img/perfume-2.jpg", "/img/cosmetic-2.jpg"],
+      images: ["/img/perfume.webp", "/img/cosmetic.webp", "/img/perfume-2.webp", "/img/cosmetic-2.webp"],
       metaTitle: "Fotografía de producto con IA — ArtiMindArt",
       metaDesc:
         "Bodegones y packshots de producto con calidad de estudio de lujo. Cosmética, perfume, tech y más. Listo para ecommerce y campaña.",
@@ -62,7 +62,7 @@ export const services: Record<Lang, Service[]> = {
         "Ritmo y montaje cinematográfico",
         "Versiones por canal y duración",
       ],
-      images: ["/img/portrait-2.jpg", "/img/model-1.jpg", "/img/bag.jpg", "/img/sneakers.jpg"],
+      images: ["/img/portrait-2.webp", "/img/model-1.webp", "/img/bag.webp", "/img/sneakers.webp"],
       metaTitle: "Spots de vídeo con IA — ArtiMindArt",
       metaDesc:
         "Anuncios y piezas de vídeo con IA y ritmo cinematográfico para redes, web y campañas. El impacto de una productora a una fracción del coste.",
@@ -82,7 +82,7 @@ export const services: Record<Lang, Service[]> = {
         "Background, pose and framing variations",
         "Print-grade finishing with Magnific",
       ],
-      images: ["/img/model-1.jpg", "/img/portrait.jpg", "/img/portrait-2.jpg", "/img/hero.jpg"],
+      images: ["/img/model-1.webp", "/img/portrait.webp", "/img/portrait-2.webp", "/img/hero.webp"],
       metaTitle: "Fashion with AI models — ArtiMindArt",
       metaDesc:
         "Editorials, lookbooks and fashion campaigns with AI models and styling. No castings or locations. Studio quality in days.",
@@ -100,7 +100,7 @@ export const services: Record<Lang, Service[]> = {
         "Adaptations for banner, product page and social",
         "Print-grade finishing with Magnific",
       ],
-      images: ["/img/perfume.jpg", "/img/cosmetic.jpg", "/img/perfume-2.jpg", "/img/cosmetic-2.jpg"],
+      images: ["/img/perfume.webp", "/img/cosmetic.webp", "/img/perfume-2.webp", "/img/cosmetic-2.webp"],
       metaTitle: "AI product photography — ArtiMindArt",
       metaDesc:
         "Product still life and packshots with luxury studio quality. Cosmetics, perfume, tech and more. Ready for ecommerce and campaign.",
@@ -118,7 +118,7 @@ export const services: Record<Lang, Service[]> = {
         "Cinematic rhythm and editing",
         "Versions per channel and duration",
       ],
-      images: ["/img/portrait-2.jpg", "/img/model-1.jpg", "/img/bag.jpg", "/img/sneakers.jpg"],
+      images: ["/img/portrait-2.webp", "/img/model-1.webp", "/img/bag.webp", "/img/sneakers.webp"],
       metaTitle: "AI video spots — ArtiMindArt",
       metaDesc:
         "AI ads and video pieces with cinematic rhythm for social, web and campaigns. Production-house impact at a fraction of the cost.",

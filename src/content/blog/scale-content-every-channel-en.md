@@ -4,7 +4,7 @@ title: "One concept, every channel: scaling visuals with AI"
 path: "scale-content-every-channel"
 date: "2026-05-14"
 excerpt: "How a single art direction becomes editorial, social, paid and ecommerce assets — fast, and on-brand."
-cover: "/img/cosmetic.jpg"
+cover: "/img/cosmetic.webp"
 tags: ["Content", "Scale"]
 readingTime: 6
 ---

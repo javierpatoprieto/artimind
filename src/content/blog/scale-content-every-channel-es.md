@@ -4,7 +4,7 @@ title: "Un concepto, todos los canales: escalar visuales con IA"
 path: "scale-content-every-channel"
 date: "2026-05-14"
 excerpt: "Cómo una sola dirección de arte se convierte en piezas de editorial, social, paid y ecommerce, rápido y con coherencia."
-cover: "/img/cosmetic.jpg"
+cover: "/img/cosmetic.webp"
 tags: ["Contenido", "Escala"]
 readingTime: 6
 ---

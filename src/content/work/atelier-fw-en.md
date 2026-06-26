@@ -6,8 +6,8 @@ client: "Atelier"
 year: "2026"
 category: "Fashion"
 excerpt: "A full campaign editorial with AI-generated models, styling and art direction."
-cover: "/img/rooftop.jpg"
-images: ["/img/rooftop.jpg", "/img/laundry.jpg", "/img/doorway.jpg", "/img/gas.jpg"]
+cover: "/img/rooftop.webp"
+images: ["/img/rooftop.webp", "/img/laundry.webp", "/img/doorway.webp", "/img/gas.webp"]
 order: 1
 ---
 

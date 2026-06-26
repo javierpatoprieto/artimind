@@ -4,7 +4,7 @@ title: "Product photography without a studio, set or shipping"
 path: "product-photography-without-studio"
 date: "2026-05-30"
 excerpt: "Why you no longer need to send product across the country to get campaign-grade stills."
-cover: "/img/watch.jpg"
+cover: "/img/watch.webp"
 tags: ["Product", "Photography"]
 readingTime: 6
 ---

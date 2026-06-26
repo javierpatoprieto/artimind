@@ -4,7 +4,7 @@ title: "Launch a full fashion campaign with AI in days"
 path: "fashion-campaign-in-days"
 date: "2026-06-20"
 excerpt: "From mood board to a complete, on-brand campaign in editorial, vertical and ecommerce formats — without a single shoot."
-cover: "/img/rooftop.jpg"
+cover: "/img/rooftop.webp"
 tags: ["Fashion", "Campaign"]
 readingTime: 6
 ---

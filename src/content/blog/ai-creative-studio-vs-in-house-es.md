@@ -4,7 +4,7 @@ title: "¿Contratar un estudio creativo de IA o montarlo en casa?"
 path: "ai-creative-studio-vs-in-house"
 date: "2026-05-22"
 excerpt: "Los pros y contras reales entre aprender IA por tu cuenta o traer a un especialista que ya entrega."
-cover: "/img/doorway.jpg"
+cover: "/img/doorway.webp"
 tags: ["Estudio", "Estrategia"]
 readingTime: 6
 ---

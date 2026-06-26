@@ -6,8 +6,8 @@ client: "Vestra"
 year: "2025"
 category: "Product"
 excerpt: "An accessories catalog on-model and in still life, consistent and at scale for ecommerce."
-cover: "/img/bed.jpg"
-images: ["/img/bed.jpg", "/img/tennis.jpg", "/img/carwash.jpg", "/img/dawn.jpg"]
+cover: "/img/bed.webp"
+images: ["/img/bed.webp", "/img/tennis.webp", "/img/carwash.webp", "/img/dawn.webp"]
 order: 3
 ---
 

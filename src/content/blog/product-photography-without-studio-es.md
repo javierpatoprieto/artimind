@@ -4,7 +4,7 @@ title: "Fotografía de producto sin estudio, set ni envíos"
 path: "product-photography-without-studio"
 date: "2026-05-30"
 excerpt: "Por qué ya no necesitas mandar el producto al otro lado del país para conseguir bodegones de campaña."
-cover: "/img/watch.jpg"
+cover: "/img/watch.webp"
 tags: ["Producto", "Fotografía"]
 readingTime: 6
 ---

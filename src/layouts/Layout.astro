@@ -13,7 +13,7 @@ interface Props {
   ogImage?: string;
   jsonld?: Record<string, any>;
 }
-const { lang, page, title, description, ogImage = "/img/hero.jpg", jsonld } = Astro.props;
+const { lang, page, title, description, ogImage = "/img/hero.webp", jsonld } = Astro.props;
 const altLang: Lang = lang === "es" ? "en" : "es";
 const altHref = routes[altLang][page];
 const canonical = SITE + Astro.url.pathname;
