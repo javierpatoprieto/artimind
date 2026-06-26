@@ -252,13 +252,12 @@ export function useTranslations(lang: Lang) {
 }
 
 export const CONTACT = {
-  // TODO Javier: tu número real con prefijo internacional, sin + ni espacios.
-  whatsapp: "34600000000",
+  whatsapp: "34669385624",
   x: "https://x.com/artimindArt",
   xHandle: "@artimindArt",
-  email: "hola@artimindart.com",
+  email: "hello@artimind.art",
   magnific: "https://magnific.ai",
   web: "https://javierpato.es",
 };
 
-export const SITE = "https://www.artimind.art";
+export const SITE = "https://artimind.art";
