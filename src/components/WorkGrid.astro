@@ -39,13 +39,13 @@ if (limit) items = items.slice(0, limit);
 
   {more && (
     <div class="wrap wg__cta" data-reveal>
-      <a class="btn btn--light" href={r.work}>{t("work.all")} <span class="arrow">→</span></a>
+      <a class="btn btn--dark" href={r.work}>{t("work.all")} <span class="arrow">→</span></a>
     </div>
   )}
 </section>
 
 <style>
-  .wg { background: var(--bg); }
+  .wg { background: var(--bg); padding-bottom: clamp(2rem, 4vw, 3rem); }
   .wg__head { display: grid; gap: 1rem; max-width: 50ch; margin: 0 0 clamp(2.5rem,5vw,3.5rem); }
   .wg__sub { color: var(--muted); }
   .wg__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.2rem,2.5vw,2.4rem); }
