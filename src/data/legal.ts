@@ -26,4 +26,4 @@ export const GA_ID = "G-CRGWC2RZ64";
 // Pega aquí SOLO el valor "content" del <meta name="google-site-verification">
 // que te da Search Console (ej.: "abc123..."). Vacío = no se añade la etiqueta.
 // (Para una "propiedad de dominio" no se usa esto: es un registro DNS TXT.)
-export const GSC_VERIFICATION = "";
+export const GSC_VERIFICATION = "j75ruLmbJWAgu6nZ4TucHVURRfNUl75MgTUwEDl-0qM";
