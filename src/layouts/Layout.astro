@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import ChatWidget from "../components/ChatWidget.astro";
 import CookieConsent from "../components/CookieConsent.astro";
 import { routes, SITE, type Lang, type PageKey } from "../i18n/ui";
+import { GSC_VERIFICATION } from "../data/legal";
 
 interface Props {
   lang: Lang;
@@ -38,6 +39,7 @@ const orgLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {GSC_VERIFICATION && <meta name="google-site-verification" content={GSC_VERIFICATION} />}
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

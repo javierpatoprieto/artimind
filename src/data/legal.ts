@@ -21,3 +21,9 @@ export const LEGAL = {
 // Pega aquí tu ID de Google Analytics 4 para ACTIVAR la analítica.
 // Ej.: "G-XXXXXXXXXX". Vacío = Analytics desactivado (el banner sigue funcionando).
 export const GA_ID = "G-CRGWC2RZ64";
+
+// Verificación de Google Search Console por ETIQUETA META (propiedad de prefijo de URL).
+// Pega aquí SOLO el valor "content" del <meta name="google-site-verification">
+// que te da Search Console (ej.: "abc123..."). Vacío = no se añade la etiqueta.
+// (Para una "propiedad de dominio" no se usa esto: es un registro DNS TXT.)
+export const GSC_VERIFICATION = "";
