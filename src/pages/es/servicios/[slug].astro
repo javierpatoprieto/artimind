@@ -48,7 +48,7 @@ const jsonld = {
 
   <section class="sd__gallery">
     <div class="wrap wrap--wide sd__imgs">
-      {service.images.map((src) => <figure data-reveal><img src={src} alt={service.title} loading="lazy" /></figure>)}
+      {service.images.slice(0, 4).map((src) => <figure data-reveal><img src={src} alt={service.title} loading="lazy" /></figure>)}
     </div>
   </section>
 
