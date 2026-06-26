@@ -36,18 +36,20 @@ const cols = [
   .sb__sub { color: var(--muted); font-size: clamp(1.02rem,1rem+0.3vw,1.2rem); }
   .sb__cta .arrow { font-size: 0.9em; }
 
-  .sb__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
-  .sb__col { display: flex; flex-direction: column; padding: clamp(2rem,3vw,2.6rem) clamp(1.4rem,2.4vw,2.4rem) 0 0; border-right: 1px solid var(--line); }
+  .sb__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--ink); }
+  .sb__col { display: flex; flex-direction: column; padding: clamp(2.4rem,3.5vw,3.4rem) clamp(2rem,2.8vw,3rem) 0; border-right: 1px solid var(--line); }
+  .sb__col:first-child { padding-left: 0; }
   .sb__col:last-child { border-right: 0; padding-right: 0; }
-  .sb__k { font-family: var(--font); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.2rem; max-width: 22ch; line-height: 1.4; min-height: 2.8em; }
-  .sb__b { color: var(--muted); font-size: 0.95rem; margin: 0 0 2.2rem; max-width: 34ch; min-height: 3em; }
+  .sb__k { font-family: var(--font); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.4rem; max-width: 22ch; line-height: 1.45; min-height: 2.9em; }
+  .sb__b { color: var(--muted); font-size: 0.95rem; line-height: 1.6; margin: 0 0 2.8rem; max-width: 34ch; min-height: 3em; }
   .sb__n { font-family: var(--font-display); font-size: clamp(3rem, 2rem + 4vw, 5.5rem); line-height: 0.9; letter-spacing: -0.03em; margin-top: auto; }
-  .sb__f { font-size: 0.82rem; color: var(--muted); margin: 0.9rem 0 0; max-width: 30ch; }
+  .sb__f { font-size: 0.82rem; color: var(--muted); margin: 1.2rem 0 0; max-width: 30ch; }
   @media (min-width: 821px) { .sb__f { min-height: 2.4em; } }
 
   @media (max-width: 820px) {
     .sb__grid { grid-template-columns: 1fr; }
-    .sb__col { border-right: 0; border-bottom: 1px solid var(--line); padding-right: 0; }
+    .sb__col { border-right: 0; border-bottom: 1px solid var(--line); padding: clamp(2rem,6vw,2.6rem) 0; }
+    .sb__col:first-child { padding-top: clamp(2rem,6vw,2.6rem); }
     .sb__col:last-child { border-bottom: 0; }
   }
 </style>

@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../../layouts/Layout.astro";
-import CTABand from "../../../components/CTABand.astro";
-import { useTranslations, routes, SITE } from "../../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
+import CTABand from "../../components/CTABand.astro";
+import { useTranslations, routes, SITE } from "../../i18n/ui";
 
 export async function getStaticPaths() {
   const items = await getCollection("work", (e) => e.data.lang === "en");

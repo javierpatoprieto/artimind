@@ -236,12 +236,12 @@ export const routes: Record<Lang, Record<PageKey, string>> = {
     contact: "/es/contacto/",
   },
   en: {
-    home: "/en/",
-    services: "/en/services/",
-    work: "/en/work/",
-    blog: "/en/blog/",
-    about: "/en/studio/",
-    contact: "/en/contact/",
+    home: "/",
+    services: "/services/",
+    work: "/work/",
+    blog: "/blog/",
+    about: "/studio/",
+    contact: "/contact/",
   },
 };
 

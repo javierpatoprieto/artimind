@@ -1,8 +1,8 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import CTABand from "../../../components/CTABand.astro";
-import { services } from "../../../data/services";
-import { useTranslations, routes, SITE } from "../../../i18n/ui";
+import Layout from "../../layouts/Layout.astro";
+import CTABand from "../../components/CTABand.astro";
+import { services } from "../../data/services";
+import { useTranslations, routes, SITE } from "../../i18n/ui";
 
 export function getStaticPaths() {
   return services.en.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));

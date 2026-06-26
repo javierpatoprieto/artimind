@@ -4,11 +4,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://www.artimind.art',
   i18n: {
-    defaultLocale: 'es',
-    locales: ['es', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'es'],
     routing: {
-      prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
+      prefixDefaultLocale: false,
     },
   },
 });

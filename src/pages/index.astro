@@ -1,4 +1,28 @@
 ---
-// Root redirect to default locale (ES)
-return Astro.redirect("/es/");
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Proof from "../components/Proof.astro";
+import StatsBand from "../components/StatsBand.astro";
+import ServicesTeaser from "../components/ServicesTeaser.astro";
+import WorkGrid from "../components/WorkGrid.astro";
+import FeaturedPosts from "../components/FeaturedPosts.astro";
+import Magnific from "../components/Magnific.astro";
+import CTABand from "../components/CTABand.astro";
+const lang = "en" as const;
 ---
+
+<Layout
+  lang={lang}
+  page="home"
+  title="ArtiMindArt — AI images & videos that sell | Fashion & product"
+  description="AI creative studio. I turn any product into images and videos with major-production quality. Fashion and product specialist. Official Magnific partner."
+>
+  <Hero lang={lang} />
+  <Proof lang={lang} />
+  <ServicesTeaser lang={lang} />
+  <StatsBand lang={lang} />
+  <WorkGrid lang={lang} limit={3} more />
+  <Magnific lang={lang} />
+  <FeaturedPosts lang={lang} />
+  <CTABand lang={lang} />
+</Layout>
