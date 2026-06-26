@@ -4,13 +4,23 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const r = routes[lang];
+// Imágenes del carrusel (el vídeo es la primera diapositiva)
+const slides = ["/img/portrait.webp", "/img/sunglasses.webp", "/img/sneakers.webp", "/img/perfume.webp"];
+const total = slides.length + 1;
 ---
 
 <section class="hero" id="top">
   <div class="hero__bg" aria-hidden="true">
-    <video autoplay muted loop playsinline poster="/img/rooftop.webp" preload="metadata">
-      <source src="/video/hero.mp4" type="video/mp4" />
-    </video>
+    <div class="hero__slides">
+      <div class="hero__slide is-active" data-slide>
+        <video autoplay muted loop playsinline poster="/img/rooftop.webp" preload="metadata">
+          <source src="/video/hero.mp4" type="video/mp4" />
+        </video>
+      </div>
+      {slides.map((src) => (
+        <div class="hero__slide" data-slide><img src={src} alt="" loading="eager" decoding="async" /></div>
+      ))}
+    </div>
     <div class="hero__scrim"></div>
   </div>
 
@@ -26,6 +36,12 @@ const r = routes[lang];
     </div>
   </div>
 
+  <div class="hero__dots" aria-label="Carrusel">
+    {Array.from({ length: total }).map((_, i) => (
+      <button class={`hero__dot ${i === 0 ? "is-active" : ""}`} data-dot aria-label={`Ver imagen ${i + 1}`}></button>
+    ))}
+  </div>
+
   <span class="hero__index" aria-hidden="true">ARTIMINDART — AI STUDIO</span>
 </section>
 <span id="after-hero"></span>
@@ -38,7 +54,12 @@ const r = routes[lang];
     overflow: hidden; color: #fff;
   }
   .hero__bg { position: absolute; inset: 0; z-index: 0; background: var(--ink); }
-  .hero__bg video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+  .hero__slides { position: absolute; inset: 0; }
+  .hero__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s var(--ease); }
+  .hero__slide.is-active { opacity: 1; }
+  .hero__slide video, .hero__slide img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); display: block; }
+  .hero__slide.is-active video, .hero__slide.is-active img { animation: heroZoom 7s var(--ease) forwards; }
+  @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.07); } }
   .hero__scrim {
     position: absolute; inset: 0;
     background: linear-gradient(180deg, rgba(10,10,10,.45) 0%, rgba(10,10,10,.1) 40%, rgba(10,10,10,.78) 100%);
@@ -53,10 +74,40 @@ const r = routes[lang];
     color: rgba(255,255,255,.85); font-weight: 400;
   }
   .hero__cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.4rem; }
+  .hero__dots { position: absolute; z-index: 2; bottom: 1.6rem; right: var(--pad); display: flex; gap: 0.55rem; }
+  .hero__dot { width: 30px; height: 3px; padding: 0; border: 0; cursor: pointer; background: rgba(255,255,255,.35); transition: background 0.3s var(--ease); }
+  .hero__dot:hover { background: rgba(255,255,255,.65); }
+  .hero__dot.is-active { background: #fff; }
   .hero__index {
-    position: absolute; bottom: 1.6rem; right: var(--pad); z-index: 2;
+    position: absolute; bottom: 2.9rem; right: var(--pad); z-index: 2;
     font-size: 0.68rem; letter-spacing: 0.2em; color: rgba(255,255,255,.55);
   }
-  @media (prefers-reduced-motion: reduce) { .hero__bg video { display: none; } }
-  @media (max-width: 640px) { .hero__index { display: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__bg video { display: none; }
+    .hero__slide { transition: none; }
+    .hero__slide.is-active video, .hero__slide.is-active img { animation: none; }
+  }
+  @media (max-width: 640px) { .hero__index { display: none; } .hero__dots { bottom: 1.2rem; } }
 </style>
+
+<script>
+  const slides = Array.from(document.querySelectorAll<HTMLElement>(".hero__slide"));
+  const dots = Array.from(document.querySelectorAll<HTMLElement>(".hero__dot"));
+  if (slides.length > 1) {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let i = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const go = (n: number) => {
+      slides[i].classList.remove("is-active");
+      dots[i]?.classList.remove("is-active");
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add("is-active");
+      dots[i]?.classList.add("is-active");
+    };
+    const start = () => { if (!reduce) timer = setInterval(() => go(i + 1), 5500); };
+    const reset = () => { if (timer) clearInterval(timer); start(); };
+    dots.forEach((d, idx) => d.addEventListener("click", () => { go(idx); reset(); }));
+    if (reduce) go(1); // sin movimiento: muestra una imagen fija (no el vídeo oculto)
+    start();
+  }
+</script>

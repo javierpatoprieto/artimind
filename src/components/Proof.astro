@@ -8,8 +8,8 @@ const brands = ["ATELIER", "NORDA", "LUMA", "VESTRA", "AURÉ", "MODE&CO", "STUDI
 
 <section class="proof">
   <div class="wrap proof__head">
-    <span class="eyebrow proof__eyebrow">{lang === "es" ? "Confían en la IA" : "They trust AI"}</span>
-    <p class="proof__claim">{t("proof")}</p>
+    <span class="eyebrow proof__eyebrow" data-reveal>{lang === "es" ? "Confían en la IA" : "They trust AI"}</span>
+    <p class="proof__claim" data-reveal style="transition-delay:.05s">{t("proof")}</p>
   </div>
   <div class="proof__strip" aria-hidden="true">
     <div class="proof__track">
