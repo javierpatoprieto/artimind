@@ -1,0 +1,85 @@
+---
+import { useTranslations, CONTACT, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const handle = CONTACT.xHandle.replace(/^@/, "");
+const profile = `https://twitter.com/${handle}`;
+---
+
+<section class="xf">
+  <div class="wrap xf__head">
+    <div>
+      <span class="eyebrow xf__eyebrow">{t("xfeed.eyebrow")}</span>
+      <h2 class="h-lg xf__title">{t("xfeed.title")}</h2>
+      <p class="xf__sub">{t("xfeed.sub")}</p>
+    </div>
+    <a class="btn btn--on-dark xf__cta" href={CONTACT.x} target="_blank" rel="noopener">
+      {t("xfeed.cta")} <span class="arrow">↗</span>
+    </a>
+  </div>
+
+  <div class="wrap xf__frame" id="xf-frame" data-profile={profile}>
+    <a
+      class="twitter-timeline"
+      data-theme="dark"
+      data-chrome="noheader nofooter noborders transparent"
+      data-tweet-limit="6"
+      data-dnt="true"
+      href={profile}
+    >{`Posts de @${handle}`}</a>
+
+    <div class="xf__fallback" id="xf-fallback">
+      <span class="xf__at">@{handle}</span>
+      <a class="btn btn--on-dark" href={CONTACT.x} target="_blank" rel="noopener">{t("xfeed.cta")} <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8" is:inline></script>
+<script is:inline>
+  (function () {
+    var frame = document.getElementById("xf-frame");
+    var fb = document.getElementById("xf-fallback");
+    if (!frame || !fb) return;
+    function loaded() {
+      var f = frame.querySelector("iframe");
+      return f && f.offsetHeight > 120;
+    }
+    function check() {
+      if (loaded()) { fb.style.display = "none"; frame.classList.add("is-live"); }
+      else { fb.style.display = "flex"; }
+    }
+    // Da tiempo al widget de X; si no puebla, deja el fallback visible.
+    setTimeout(check, 2500);
+    setTimeout(check, 6000);
+  })();
+</script>
+
+<style>
+  .xf { background: var(--ink); color: #fff; padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .xf__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: clamp(2rem, 4vw, 3rem); border-bottom: 1px solid rgba(255,255,255,.14); padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+  .xf__eyebrow { color: #fff; }
+  .xf__eyebrow::before { background: var(--warm, #e7c9a9); }
+  .xf__title { margin: 1rem 0 0.8rem; }
+  .xf__sub { color: rgba(255,255,255,.7); max-width: 48ch; margin: 0; }
+  .xf__cta { flex: none; }
+  .xf__frame {
+    position: relative;
+    max-width: 640px; margin-inline: auto;
+    min-height: 260px;
+  }
+  .xf__frame.is-live { border: 1px solid rgba(255,255,255,.14); }
+  .xf__frame :global(.twitter-timeline) { width: 100% !important; }
+  /* ocultar el texto placeholder del anchor hasta que X lo convierta en iframe */
+  .xf__frame :global(a.twitter-timeline) { font-size: 0; color: transparent; }
+
+  .xf__fallback {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; gap: 1.2rem; min-height: 260px;
+    border: 1px solid rgba(255,255,255,.14); padding: 2.5rem 1.5rem;
+  }
+  .xf__at { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.2rem); }
+  .xf__fallback p { color: rgba(255,255,255,.65); max-width: 40ch; margin: 0; }
+  @media (max-width: 720px) { .xf__cta { width: 100%; } }
+</style>

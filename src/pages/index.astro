@@ -7,6 +7,7 @@ import ServicesTeaser from "../components/ServicesTeaser.astro";
 import WorkGrid from "../components/WorkGrid.astro";
 import FeaturedPosts from "../components/FeaturedPosts.astro";
 import Magnific from "../components/Magnific.astro";
+import XFeed from "../components/XFeed.astro";
 import CTABand from "../components/CTABand.astro";
 const lang = "en" as const;
 ---
@@ -24,5 +25,6 @@ const lang = "en" as const;
   <WorkGrid lang={lang} limit={3} more />
   <Magnific lang={lang} />
   <FeaturedPosts lang={lang} />
+  <XFeed lang={lang} />
   <CTABand lang={lang} />
 </Layout>
