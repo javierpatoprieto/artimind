@@ -1,0 +1,64 @@
+---
+import { useTranslations, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const partners = [
+  { n: "01", name: "Magnific", body: t("partners.magnific.body"), url: "https://magnific.ai" },
+  { n: "02", name: "Dreamina AI", body: t("partners.dreamina.body"), url: "https://dreamina.capcut.com" },
+  { n: "03", name: "Higgsfield", body: t("partners.higgsfield.body"), url: "https://higgsfield.ai" },
+];
+---
+
+<section class="pt">
+  <div class="wrap pt__head">
+    <span class="eyebrow pt__eyebrow">{t("partners.eyebrow")}</span>
+    <h2 class="h-lg pt__title">{t("partners.title")}</h2>
+    <p class="pt__sub">{t("partners.sub")}</p>
+  </div>
+
+  <div class="wrap wrap--wide pt__grid">
+    {partners.map((p) => (
+      <a class="pt__card" href={p.url} target="_blank" rel="noopener" data-reveal>
+        <span class="pt__n">{p.n}</span>
+        <span class="pt__role">{t("partners.role")}</span>
+        <h3 class="pt__name">{p.name}</h3>
+        <p class="pt__body">{p.body}</p>
+        <span class="pt__visit">{t("partners.visit")} <span class="arrow">↗</span></span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .pt { background: var(--ink); color: #fff; padding-block: clamp(4.5rem, 9vw, 8rem); }
+  .pt__head { max-width: 54ch; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .pt__eyebrow { color: #fff; }
+  .pt__eyebrow::before { background: var(--warm, #e7c9a9); }
+  .pt__title { margin: 1rem 0 1rem; }
+  .pt__sub { color: rgba(255,255,255,.7); font-size: clamp(1.02rem,1rem+0.3vw,1.2rem); margin: 0; }
+
+  .pt__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.18); }
+  .pt__card {
+    display: flex; flex-direction: column; align-items: flex-start;
+    padding: clamp(2rem,3vw,2.8rem) clamp(1.4rem,2.4vw,2.4rem) clamp(2rem,3vw,2.8rem) 0;
+    border-right: 1px solid rgba(255,255,255,.18);
+    transition: background 0.4s var(--ease);
+  }
+  .pt__card:last-child { border-right: 0; }
+  .pt__card:hover { background: rgba(255,255,255,.04); }
+  .pt__n { font-family: var(--font); font-size: 0.72rem; letter-spacing: 0.16em; color: rgba(255,255,255,.45); }
+  .pt__role { margin-top: 1.4rem; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; border: 1px solid rgba(255,255,255,.3); padding: 0.4em 0.8em; }
+  .pt__name { font-family: var(--font-display); font-size: clamp(1.9rem, 2.6vw, 2.8rem); margin: 1.2rem 0 0.9rem; }
+  .pt__body { color: rgba(255,255,255,.68); font-size: 0.95rem; margin: 0 0 1.6rem; flex: 1; }
+  .pt__visit { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.5em; }
+  .pt__visit .arrow { transition: transform 0.4s var(--ease); }
+  .pt__card:hover .pt__visit .arrow { transform: translate(3px, -3px); }
+
+  @media (max-width: 820px) {
+    .pt__grid { grid-template-columns: 1fr; }
+    .pt__card { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.18); padding-right: 0; }
+    .pt__card:last-child { border-bottom: 0; }
+  }
+</style>

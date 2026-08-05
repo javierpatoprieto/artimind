@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import CollabForm from "../../components/CollabForm.astro";
+import Partners from "../../components/Partners.astro";
+import { useTranslations } from "../../i18n/ui";
+const lang = "es" as const;
+const t = useTranslations(lang);
+---
+
+<Layout
+  lang={lang}
+  page="collab"
+  title="Colabora — ArtiMindArt | Marcas, agencias y plataformas"
+  description="¿Tu marca quiere crear conmigo? Partner de Magnific, Dreamina AI y Higgsfield. Cuéntame tu proyecto y te respondo el mismo día."
+>
+  <PageHeader kicker={t("collab.eyebrow")} title={t("collab.title")} sub={t("collab.sub")} />
+  <CollabForm lang={lang} />
+  <Partners lang={lang} />
+</Layout>

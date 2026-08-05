@@ -11,8 +11,37 @@ export const ui = {
     "nav.work": "Proyectos",
     "nav.blog": "Blog",
     "nav.bio": "Estudio",
+    "nav.collab": "Colabora",
     "nav.contact": "Contacto",
     "nav.cta": "Empezar",
+
+    "partners.eyebrow": "Alianzas",
+    "partners.title": "Trabajo con lo mejor de la IA visual",
+    "partners.sub": "Soy partner de las plataformas que marcan el ritmo. Para tu marca significa una cosa: acceso a la última tecnología, con criterio de estudio.",
+    "partners.role": "Partner",
+    "partners.magnific.body": "Upscaling y mejora de imagen con IA. El acabado que lleva una pieza a calidad de impresión y campaña.",
+    "partners.dreamina.body": "La suite creativa de ByteDance para imagen y vídeo. Potencia y velocidad de primera línea.",
+    "partners.higgsfield.body": "Vídeo con movimiento cinematográfico y control de cámara. Piezas con alma de cine.",
+    "partners.visit": "Visitar",
+
+    "collab.eyebrow": "Colabora",
+    "collab.title": "¿Tu marca quiere crear conmigo?",
+    "collab.sub": "Marcas, agencias y plataformas: si quieres producir conmigo o explorar una colaboración, cuéntamelo aquí. Te respondo el mismo día.",
+    "collab.form.name": "Nombre",
+    "collab.form.brand": "Marca o empresa",
+    "collab.form.email": "Email",
+    "collab.form.type": "Tipo de proyecto",
+    "collab.form.budget": "Presupuesto orientativo",
+    "collab.form.message": "Cuéntame la idea",
+    "collab.form.send": "Enviar por WhatsApp",
+    "collab.form.note": "Al enviar se abre WhatsApp con tu mensaje listo. Sin formularios que se pierden.",
+    "collab.type.fashion": "Moda",
+    "collab.type.product": "Producto",
+    "collab.type.video": "Vídeo / Spot",
+    "collab.type.campaign": "Campaña",
+    "collab.type.partnership": "Colaboración de marca",
+    "collab.type.other": "Otro",
+    "collab.budget.pick": "Elige una opción",
 
     "hero.eyebrow": "Estudio creativo de IA",
     "hero.title": "Imágenes que venden,",
@@ -131,6 +160,35 @@ export const ui = {
     "nav.work": "Work",
     "nav.blog": "Blog",
     "nav.bio": "Studio",
+    "nav.collab": "Collaborate",
+
+    "partners.eyebrow": "Partnerships",
+    "partners.title": "I work with the best of visual AI",
+    "partners.sub": "I'm a partner of the platforms setting the pace. For your brand it means one thing: access to the latest technology, with a studio's judgment.",
+    "partners.role": "Partner",
+    "partners.magnific.body": "AI upscaling and image enhancement. The finish that takes a piece to print and campaign quality.",
+    "partners.dreamina.body": "ByteDance's creative suite for image and video. First-class power and speed.",
+    "partners.higgsfield.body": "Video with cinematic motion and camera control. Pieces with the soul of cinema.",
+    "partners.visit": "Visit",
+
+    "collab.eyebrow": "Collaborate",
+    "collab.title": "Does your brand want to create with me?",
+    "collab.sub": "Brands, agencies and platforms: if you want to produce with me or explore a collaboration, tell me here. I reply the same day.",
+    "collab.form.name": "Name",
+    "collab.form.brand": "Brand or company",
+    "collab.form.email": "Email",
+    "collab.form.type": "Project type",
+    "collab.form.budget": "Ballpark budget",
+    "collab.form.message": "Tell me the idea",
+    "collab.form.send": "Send via WhatsApp",
+    "collab.form.note": "On send, WhatsApp opens with your message ready. No forms that get lost.",
+    "collab.type.fashion": "Fashion",
+    "collab.type.product": "Product",
+    "collab.type.video": "Video / Spot",
+    "collab.type.campaign": "Campaign",
+    "collab.type.partnership": "Brand collaboration",
+    "collab.type.other": "Other",
+    "collab.budget.pick": "Choose an option",
     "nav.contact": "Contact",
     "nav.cta": "Get started",
 
@@ -248,7 +306,7 @@ export const ui = {
   },
 } as const;
 
-export type PageKey = "home" | "services" | "work" | "blog" | "about" | "contact";
+export type PageKey = "home" | "services" | "work" | "blog" | "about" | "collab" | "contact";
 
 export const routes: Record<Lang, Record<PageKey, string>> = {
   es: {
@@ -257,6 +315,7 @@ export const routes: Record<Lang, Record<PageKey, string>> = {
     work: "/es/proyectos/",
     blog: "/es/blog/",
     about: "/es/estudio/",
+    collab: "/es/colabora/",
     contact: "/es/contacto/",
   },
   en: {
@@ -265,6 +324,7 @@ export const routes: Record<Lang, Record<PageKey, string>> = {
     work: "/work/",
     blog: "/blog/",
     about: "/studio/",
+    collab: "/collaborate/",
     contact: "/contact/",
   },
 };
