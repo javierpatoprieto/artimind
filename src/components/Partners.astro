@@ -5,9 +5,9 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const partners = [
-  { n: "01", name: "Magnific", body: t("partners.magnific.body"), url: "https://magnific.ai", img: "/img/sunglasses.webp" },
-  { n: "02", name: "Dreamina AI", body: t("partners.dreamina.body"), url: "https://dreamina.capcut.com", img: "/img/rooftop.webp" },
-  { n: "03", name: "Higgsfield", body: t("partners.higgsfield.body"), url: "https://higgsfield.ai", img: "/img/carwash.webp" },
+  { n: "01", name: "Magnific", body: t("partners.magnific.body"), url: "https://magnific.ai", img: "/img/sunglasses.webp", logo: "/img/logos/magnific.svg" },
+  { n: "02", name: "Dreamina AI", body: t("partners.dreamina.body"), url: "https://dreamina.capcut.com", img: "/img/rooftop.webp", logo: "/img/logos/dreamina.png" },
+  { n: "03", name: "Higgsfield", body: t("partners.higgsfield.body"), url: "https://higgsfield.ai", img: "/img/carwash.webp", logo: "/img/logos/higgsfield.svg" },
 ];
 ---
 
@@ -28,6 +28,7 @@ const partners = [
           <span class="pt__n">{p.n}</span>
         </div>
         <div class="pt__content">
+          <span class="pt__chip"><img class="pt__logo" src={p.logo} alt={p.name} loading="lazy" /></span>
           <h3 class="pt__name">{p.name}</h3>
           <p class="pt__body">{p.body}</p>
           <span class="pt__visit">{t("partners.visit")} <span class="arrow">↗</span></span>
@@ -64,6 +65,8 @@ const partners = [
   .pt__n { font-family: var(--font); font-size: 0.72rem; letter-spacing: 0.16em; color: rgba(255,255,255,.8); }
 
   .pt__content { position: relative; z-index: 2; }
+  .pt__chip { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: #fff; padding: 9px; margin-bottom: 1.1rem; box-shadow: 0 6px 20px -8px rgba(0,0,0,.5); }
+  .pt__logo { width: 100%; height: 100%; object-fit: contain; display: block; }
   .pt__name { font-family: var(--font-display); font-size: clamp(2rem, 2.8vw, 3rem); margin: 0 0 0.7rem; }
   .pt__body { color: rgba(255,255,255,.82); font-size: 0.95rem; margin: 0 0 1.2rem; max-width: 34ch; }
   .pt__visit { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.5em; }
