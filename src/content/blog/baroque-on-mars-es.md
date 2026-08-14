@@ -37,27 +37,21 @@ Ese último plano es el método entero en miniatura. Una secuencia no son cuatro
 
 ## Los cuatro prompts
 
-### 1. La ruina
+## 1. La ruina
 
-> Wide cinematic fashion editorial on Mars: an immense baroque palace half swallowed by rust-red dust, broken marble columns and a grand curving staircase rising out of the desert into nothing, gilded mouldings tarnished and cracked, an ornate gold mirror still hanging on a fragment of standing wall reflecting empty sky; a woman in a sculptural black taffeta ball gown with an enormous train stands at the foot of the stairs, tiny against the ruin, dust drifting around her hem; salmon-pink sky with two pale moons, low raking alien sunlight casting long shadows across the oxide sand, suspended dust softening the air; shot on medium format film, fine grain, palette of rust red, salmon, tarnished gold and deep black, majestic and melancholic, hyper-detailed textures of marble, gilt, taffeta and dust --ar 4:5 --style raw
+Wide cinematic fashion editorial on Mars: an immense baroque palace half swallowed by rust-red dust, broken marble columns and a grand curving staircase rising out of the desert into nothing, gilded mouldings tarnished and cracked, an ornate gold mirror still hanging on a fragment of standing wall reflecting empty sky; a woman in a sculptural black taffeta ball gown with an enormous train stands at the foot of the stairs, tiny against the ruin, dust drifting around her hem; salmon-pink sky with two pale moons, low raking alien sunlight casting long shadows across the oxide sand, suspended dust softening the air; shot on medium format film, fine grain, palette of rust red, salmon, tarnished gold and deep black, majestic and melancholic, hyper-detailed textures of marble, gilt, taffeta and dust --ar 4:5 --style raw
 
-### 2. El trono
+## 2. El trono
 
-![El trono, sentada en el polvo](/img/mars-throne.webp)
+Cinematic fashion portrait on Mars: a woman seated on a broken baroque throne half buried in red sand, wearing a sculptural black taffeta gown with structured shoulders and a high collar, dust settled in the folds of the fabric, gloved hands resting on the carved armrests, chin lifted, gazing directly at the camera with imperial calm; behind her a fragment of frescoed ceiling collapsed into the dust, gold leaf still catching the light; low raking sun from the side, salmon sky, fine red dust hanging in the air and glowing where the light hits it; shot on 85mm lens, medium format film, palette of rust, salmon, gold and black, hyper-detailed textures of taffeta, carved wood, gilt and dust on skin --ar 4:5 --style raw
 
-> Cinematic fashion portrait on Mars: a woman seated on a broken baroque throne half buried in red sand, wearing a sculptural black taffeta gown with structured shoulders and a high collar, dust settled in the folds of the fabric, gloved hands resting on the carved armrests, chin lifted, gazing directly at the camera with imperial calm; behind her a fragment of frescoed ceiling collapsed into the dust, gold leaf still catching the light; low raking sun from the side, salmon sky, fine red dust hanging in the air and glowing where the light hits it; shot on 85mm lens, medium format film, palette of rust, salmon, gold and black, hyper-detailed textures of taffeta, carved wood, gilt and dust on skin --ar 4:5 --style raw
+## 3. El bajo del vestido
 
-### 3. El bajo del vestido
+Extreme close-up on Mars: the hem of a black taffeta ball gown dragging across rust-red sand, the stiff fabric caught mid-fold with a fine layer of red dust settled into every crease and the sharp edge of the silk catching low sunlight, and beside it a fragment of gilded baroque moulding half buried in the sand, its gold leaf peeling and oxidised; individual grains of red dust visible, a thin drift of powder blowing across the fabric; razor-thin depth of field, macro lens, medium format film, palette of black, rust and tarnished gold, tactile hyper-detailed textures of taffeta, gilt and mineral dust --ar 4:5 --style raw
 
-![El bajo del vestido arrastrando por la arena](/img/mars-hem.webp)
+## 4. Las dos lunas
 
-> Extreme close-up on Mars: the hem of a black taffeta ball gown dragging across rust-red sand, the stiff fabric caught mid-fold with a fine layer of red dust settled into every crease and the sharp edge of the silk catching low sunlight, and beside it a fragment of gilded baroque moulding half buried in the sand, its gold leaf peeling and oxidised; individual grains of red dust visible, a thin drift of powder blowing across the fabric; razor-thin depth of field, macro lens, medium format film, palette of black, rust and tarnished gold, tactile hyper-detailed textures of taffeta, gilt and mineral dust --ar 4:5 --style raw
-
-### 4. Las dos lunas
-
-![Dos lunas y un rastro](/img/mars-moons.webp)
-
-> Wide closing shot on Mars at dusk: the vast rust desert stretching to a distant horizon, the silhouette of the ruined baroque palace small on the left, and the woman walking away from camera across the empty plain, her enormous black train sweeping a long clean line through the red dust behind her; two pale moons rising in a deepening violet and salmon sky, the last low sun rimming her figure in gold, everything else silent and monumental; shot on medium format film, fine grain, palette of violet, salmon, rust and black, epic emptiness, one figure and one trail --ar 4:5 --style raw
+Wide closing shot on Mars at dusk: the vast rust desert stretching to a distant horizon, the silhouette of the ruined baroque palace small on the left, and the woman walking away from camera across the empty plain, her enormous black train sweeping a long clean line through the red dust behind her; two pale moons rising in a deepening violet and salmon sky, the last low sun rimming her figure in gold, everything else silent and monumental; shot on medium format film, fine grain, palette of violet, salmon, rust and black, epic emptiness, one figure and one trail --ar 4:5 --style raw
 
 ## Notas para quien quiera reconstruirla
 
