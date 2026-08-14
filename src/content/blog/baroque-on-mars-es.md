@@ -4,7 +4,7 @@ title: "Barroco en Marte: un estudio de dirección de arte en cuatro planos"
 path: "baroque-on-mars"
 date: "2026-08-14"
 excerpt: "Un palacio en ruinas medio enterrado en polvo rojo y alguien que sigue vistiéndose para la ocasión. Una paleta, una luz y la regla que sostiene una secuencia."
-cover: "/img/mars-moons.webp"
+cover: "/img/mars-ruin.webp"
 tags: ["Dirección de arte", "Fotografía IA"]
 readingTime: 5
 ---

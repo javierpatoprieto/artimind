@@ -4,7 +4,7 @@ title: "Baroque on Mars: a four-frame study in art direction"
 path: "baroque-on-mars"
 date: "2026-08-14"
 excerpt: "A ruined palace half-buried in red dust, and someone still dressing for the occasion. One palette, one light, and the rule that holds a sequence together."
-cover: "/img/mars-moons.webp"
+cover: "/img/mars-ruin.webp"
 tags: ["Art direction", "AI photography"]
 readingTime: 5
 ---
