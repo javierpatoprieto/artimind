@@ -1,0 +1,89 @@
+---
+import { useTranslations, CONTACT, type Lang } from "../i18n/ui";
+import { xPosts } from "../data/xposts";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const viewLabel = lang === "es" ? "Ver en X" : "View on X";
+---
+
+<section class="xc">
+  <div class="wrap xc__head">
+    <div>
+      <span class="eyebrow xc__eyebrow">{t("xfeed.eyebrow")}</span>
+      <h2 class="h-lg xc__title">{t("xfeed.title")}</h2>
+      <p class="xc__sub">{t("xfeed.sub")}</p>
+    </div>
+    <div class="xc__actions">
+      <a class="btn btn--on-dark xc__follow" href={CONTACT.x} target="_blank" rel="noopener">{t("xfeed.cta")} <span class="arrow">↗</span></a>
+      <div class="xc__nav">
+        <button class="xc__arrow" data-dir="-1" aria-label="Prev">←</button>
+        <button class="xc__arrow" data-dir="1" aria-label="Next">→</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="xc__track" id="xc-track">
+    {xPosts.map((p) => (
+      <a class="xc__card" href={p.url} target="_blank" rel="noopener">
+        <div class="xc__media">
+          {p.type === "video" && p.video ? (
+            <video autoplay muted loop playsinline preload="metadata" poster={p.cover}>
+              <source src={p.video} type="video/mp4" />
+            </video>
+          ) : (
+            <img src={p.cover} alt="" loading="lazy" />
+          )}
+          {p.type === "video" && <span class="xc__badge">▶</span>}
+        </div>
+        <p class="xc__text">{p.text}…</p>
+        <span class="xc__view">{viewLabel} <span class="arrow">↗</span></span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .xc { background: var(--ink); color: #fff; padding-block: clamp(4.5rem, 9vw, 8rem); overflow: hidden; }
+  .xc__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: clamp(2rem,4vw,3rem); }
+  .xc__eyebrow { color: #fff; }
+  .xc__eyebrow::before { background: var(--warm, #e7c9a9); }
+  .xc__title { margin: 1rem 0 0.8rem; }
+  .xc__sub { color: rgba(255,255,255,.7); max-width: 48ch; margin: 0; }
+  .xc__actions { display: flex; align-items: center; gap: 1.2rem; }
+  .xc__nav { display: flex; gap: 0.5rem; }
+  .xc__arrow { width: 46px; height: 46px; border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff; cursor: pointer; font-size: 1.1rem; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
+  .xc__arrow:hover { background: #fff; color: var(--ink); }
+
+  .xc__track {
+    display: grid; grid-auto-flow: column; grid-auto-columns: clamp(280px, 32vw, 360px);
+    gap: clamp(0.9rem, 1.6vw, 1.4rem); overflow-x: auto; scroll-snap-type: x mandatory;
+    padding: 0 var(--pad) 1rem; margin: 0 calc(-1 * var(--pad));
+    scrollbar-width: none;
+  }
+  .xc__track::-webkit-scrollbar { display: none; }
+  .xc__card { scroll-snap-align: start; display: flex; flex-direction: column; }
+  .xc__media { position: relative; aspect-ratio: 4/5; overflow: hidden; border: 1px solid rgba(255,255,255,.16); background: #000; }
+  .xc__media img, .xc__media video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: filter 0.5s var(--ease), transform 1s var(--ease); }
+  .xc__card:hover .xc__media img, .xc__card:hover .xc__media video { filter: grayscale(0); transform: scale(1.03); }
+  .xc__badge { position: absolute; top: 0.9rem; left: 0.9rem; width: 30px; height: 30px; display: grid; place-items: center; background: rgba(0,0,0,.5); backdrop-filter: blur(4px); font-size: 0.7rem; }
+  .xc__text { color: rgba(255,255,255,.82); font-size: 0.92rem; line-height: 1.5; margin: 1rem 0 0.8rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .xc__view { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.4em; color: rgba(255,255,255,.7); }
+  .xc__card:hover .xc__view { color: #fff; }
+  .xc__view .arrow { transition: transform 0.4s var(--ease); }
+  .xc__card:hover .xc__view .arrow { transform: translate(2px,-2px); }
+
+  @media (max-width: 620px) { .xc__nav { display: none; } }
+</style>
+
+<script>
+  const track = document.getElementById("xc-track");
+  document.querySelectorAll<HTMLButtonElement>(".xc__arrow").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const dir = Number(btn.dataset.dir || "1");
+      const card = track?.querySelector<HTMLElement>(".xc__card");
+      const step = card ? card.offsetWidth + 20 : 320;
+      track?.scrollBy({ left: dir * step * 1.5, behavior: "smooth" });
+    });
+  });
+</script>

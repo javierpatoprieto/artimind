@@ -7,7 +7,7 @@ import ServicesTeaser from "../components/ServicesTeaser.astro";
 import WorkGrid from "../components/WorkGrid.astro";
 import FeaturedPosts from "../components/FeaturedPosts.astro";
 import Partners from "../components/Partners.astro";
-import XFeed from "../components/XFeed.astro";
+import XCarousel from "../components/XCarousel.astro";
 import CTABand from "../components/CTABand.astro";
 const lang = "en" as const;
 ---
@@ -25,6 +25,6 @@ const lang = "en" as const;
   <WorkGrid lang={lang} limit={3} more />
   <Partners lang={lang} />
   <FeaturedPosts lang={lang} />
-  <XFeed lang={lang} />
+  <XCarousel lang={lang} />
   <CTABand lang={lang} />
 </Layout>
